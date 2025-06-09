@@ -2,7 +2,7 @@ import { Loader } from 'lucide-react'
 import { Button } from '../ui/button'
 
 type props = {
-	isPending: boolean
+	isPending?: boolean
 	title?: string
 }
 export default function ButtonSubmit({ isPending, title = 'Simpan' }: props) {

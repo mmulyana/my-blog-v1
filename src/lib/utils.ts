@@ -1,5 +1,7 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import { formatDistanceToNow } from 'date-fns'
+import { id } from 'date-fns/locale'
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -37,4 +39,12 @@ export function formatError(error: any): string {
 			? error.message
 			: JSON.stringify(error.message)
 	}
+}
+
+export function diffForHumans(targetDate: Date) {
+	if (isNaN(targetDate.getTime())) {
+		return ''
+	}
+
+	return formatDistanceToNow(targetDate, { addSuffix: true, locale: id })
 }

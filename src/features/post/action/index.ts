@@ -25,6 +25,24 @@ export const readAll = async ({
 			take: limit,
 			orderBy: { createdAt: 'desc' },
 			where: createdBy ? { createdBy } : {},
+			select: {
+				id: true,
+				title: true,
+				categories: {
+					select: {
+						id: true,
+						category: {
+							select: {
+								id: true,
+								name: true,
+								color: true,
+							},
+						},
+					},
+				},
+				featured: true,
+				createdAt: true,
+			},
 		}),
 		prisma.post.count(),
 	])
@@ -47,8 +65,19 @@ export async function createPost(formData: unknown) {
 
 		await prisma.post.create({
 			data: {
-				...parsed,
+				title: parsed.title,
+				content: parsed.content,
+				status: parsed.status,
+				featured: parsed.featured,
 				createdBy: session.user.id,
+				// Membuat relasi PostCategory
+				categories: {
+					create: parsed.categories.map((categoryId) => ({
+						category: {
+							connect: { id: categoryId },
+						},
+					})),
+				},
 			},
 		})
 
@@ -64,21 +93,35 @@ export async function createPost(formData: unknown) {
 			}
 		}
 
-		// Error lain
 		return { success: false, message: formatError(error) }
 	}
 }
+
+const PostUpdateSchema = PostSchema.extend({
+	id: z.string().min(1, 'ID tidak boleh kosong'),
+})
+
 export async function updatePost(formData: unknown) {
 	try {
 		const session = await getSessionOrThrow()
-		const parsed = PostSchema.extend({ id: z.string() }).parse(formData)
+		const parsed = PostUpdateSchema.parse(formData)
 
 		await prisma.post.update({
+			where: { id: parsed.id },
 			data: {
-				...parsed,
-			},
-			where: {
-				id: parsed.id,
+				title: parsed.title,
+				content: parsed.content,
+				status: parsed.status,
+				featured: parsed.featured,
+				// Mengatur ulang (replace) relasi categories
+				categories: {
+					deleteMany: {}, // hapus relasi lama
+					create: parsed.categories.map((categoryId) => ({
+						category: {
+							connect: { id: categoryId },
+						},
+					})),
+				},
 			},
 		})
 
@@ -94,11 +137,31 @@ export async function updatePost(formData: unknown) {
 			}
 		}
 
-		// Error lain
 		return { success: false, message: formatError(error) }
 	}
 }
 
 export const readOne = async (id: string) => {
-	return await prisma.post.findUnique({ where: { id } })
+	return await prisma.post.findUnique({
+		where: { id },
+		select: {
+			id: true,
+			title: true,
+			content: true,
+			featured: true,
+			status: true,
+
+			categories: {
+				select: {
+					id: true,
+					category: {
+						select: {
+							id: true,
+							name: true,
+						},
+					},
+				},
+			},
+		},
+	})
 }

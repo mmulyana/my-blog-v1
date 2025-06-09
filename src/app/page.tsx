@@ -1,5 +1,6 @@
 import { buttonVariants } from '@/components/ui/button'
 import { readAll } from '@/features/post/action'
+import { diffForHumans } from '@/lib/utils'
 import Link from 'next/link'
 
 export default async function Home({
@@ -14,24 +15,19 @@ export default async function Home({
 		limit: 5,
 	})
 	return (
-		<div className='max-w-4xl x-auto space-y-5'>
-			<Link
-				href={'/admin'}
-				className={buttonVariants({
-					className: 'rounded-full',
-					variant: 'outline',
-				})}
-			>
-				Admin
-			</Link>
-			<ul>
+		<div className='pt-10 px-4'>
+			<div className='w-[640px] max-w-full mx-auto bg-white'>
 				{data.map((item) => (
-					<li key={item.id} className='flex justify-between items-center'>
-						<p>{item.title}</p>
+					<div key={item.id} className='flex justify-between items-center p-6'>
+						<div>
+							<p className='text-foreground/50 text-sm'>{diffForHumans(item.createdAt)}</p>
+							<p className='text-lg text-foreground'>{item.title}</p>
+						</div>
+
 						<Link href={`/posts/${item.id}`}>Lihat</Link>
-					</li>
+					</div>
 				))}
-			</ul>
+			</div>
 		</div>
 	)
 }

@@ -11,7 +11,19 @@ import { Post } from '@/features/post/schema'
 
 import { handleFieldErrors } from '@/lib/form'
 
-export default function FormUpdate({ data }: { data?: Post & { id: string } }) {
+export default function FormUpdate({
+	data,
+	categories,
+}: {
+	data?: Omit<Post, 'categories'> & {
+		id: string
+		categories: {
+			id: string
+			category: { id: string; name: string }
+		}[]
+	}
+	categories?: { id: string; name: string }[]
+}) {
 	const router = useRouter()
 	const [isPending, setIsPending] = useState(false)
 
@@ -21,6 +33,7 @@ export default function FormUpdate({ data }: { data?: Post & { id: string } }) {
 			content: data?.content,
 			featured: data?.featured,
 			status: data?.status,
+			categories: data?.categories?.map((i) => i.category.id),
 		},
 	})
 
@@ -44,7 +57,12 @@ export default function FormUpdate({ data }: { data?: Post & { id: string } }) {
 
 	return (
 		<div>
-			<FormPost form={form} onSubmit={onSubmit} isPending={isPending} />
+			<FormPost
+				form={form}
+				onSubmit={onSubmit}
+				isPending={isPending}
+				categories={categories}
+			/>
 		</div>
 	)
 }

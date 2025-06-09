@@ -40,7 +40,6 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog'
 import { Label } from '@/components/ui/label'
-import { sampleHtmlContent } from '@/data'
 
 const lowlight = createLowlight()
 lowlight.register('javascript', javascript)
@@ -126,9 +125,9 @@ export default function TextEditor({
 
 	return (
 		<div className='w-full'>
-			<div className='border rounded-lg overflow-hidden bg-white'>
+			<div className='border border-input rounded-lg overflow-hidden bg-white'>
 				{/* Toolbar */}
-				<div className='border-b p-2 flex flex-wrap gap-1'>
+				<div className='p-2 flex flex-wrap gap-1 border-b border-input'>
 					{/* Text Formatting */}
 					<Button
 						type='button'

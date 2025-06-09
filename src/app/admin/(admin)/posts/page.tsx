@@ -20,7 +20,6 @@ export default async function ProductsPage({
 
 	return (
 		<div className='max-w-5xl mx-auto'>
-			{JSON.stringify(pagination)}
 			<div className='flex justify-between items-center'>
 				<h1>Postingan</h1>
 				<Link
@@ -34,6 +33,17 @@ export default async function ProductsPage({
 				{data.map((item) => (
 					<li key={item.id} className='flex justify-between items-center'>
 						<p>{item.title}</p>
+						<div className='flex gap-2 flex-wrap'>
+							{item.categories.map((i) => (
+								<div
+									className='rounded-full px-2.5 py-1.5'
+									style={{ background: i.category.color || '' }}
+									key={i.id}
+								>
+									{i.category.name}
+								</div>
+							))}
+						</div>
 						<Link href={`/admin/posts/${item.id}`}>Lihat</Link>
 					</li>
 				))}

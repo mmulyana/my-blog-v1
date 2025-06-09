@@ -8,7 +8,9 @@ export const PostSchema = z.object({
 		.optional()
 		.default('DRAFT'),
 	featured: z.boolean().default(false),
-	// categories: z.string().array().nullable().optional(),
+	categories: z
+		.array(z.string().min(1, 'Category tidak boleh kosong'))
+		.default([]),
 })
 
 export type Post = z.infer<typeof PostSchema>

@@ -11,15 +11,18 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form'
+import CuisineSelector from '@/components/common/cuisine-selector'
 
 export default function FormPost({
 	form,
 	onSubmit,
 	isPending,
+	categories,
 }: {
 	form: UseFormReturn<Post>
 	onSubmit: (data: Post) => void
 	isPending?: boolean
+	categories?: { id: string; name: string }[]
 }) {
 	return (
 		<Form {...form}>
@@ -53,6 +56,17 @@ export default function FormPost({
 							</FormControl>
 							<FormMessage />
 						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name='categories'
+					render={({ field }) => (
+						<CuisineSelector
+							data={categories || []}
+							value={field.value || []}
+							onChange={field.onChange}
+						/>
 					)}
 				/>
 				<div className='bg-white fixed bottom-0 left-0 w-full h-16 border-t shadow-sm flex items-center justify-end px-4'>
