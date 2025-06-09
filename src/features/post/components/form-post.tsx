@@ -77,13 +77,15 @@ export default function FormPost({
 						</FormItem>
 					)}
 				/>
-				<div>
-					<p className='text-red-400 text-sm'>
-						Warning! This action cannot be undone. Please make sure you are
-						absolutely sure before proceeding.
-					</p>
-					<AlertDestroyPost id={id} />
-				</div>
+				{id && (
+					<div>
+						<p className='text-red-400 text-sm'>
+							Warning! This action cannot be undone. Please make sure you are
+							absolutely sure before proceeding.
+						</p>
+						<AlertDestroyPost id={id} />
+					</div>
+				)}
 
 				<div className='bg-white fixed bottom-0 left-0 w-full h-16 border-t shadow-sm flex items-center justify-end px-4'>
 					<ButtonSubmit isPending={isPending || false} />

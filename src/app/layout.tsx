@@ -1,6 +1,8 @@
-import type { Metadata } from 'next'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Geist, Geist_Mono } from 'next/font/google'
+import type { Metadata } from 'next'
 import './globals.css'
+
 import ToastWrapper from '@/shared/components/common/toast-wrapper'
 
 const geistSans = Geist({
@@ -28,7 +30,9 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<ToastWrapper>{children}</ToastWrapper>
+				<NuqsAdapter>
+					<ToastWrapper>{children}</ToastWrapper>
+				</NuqsAdapter>
 			</body>
 		</html>
 	)

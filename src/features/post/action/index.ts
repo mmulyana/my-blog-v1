@@ -39,6 +39,7 @@ export async function readAll({
 			select: {
 				id: true,
 				title: true,
+				status: true,
 				categories: {
 					select: {
 						id: true,
@@ -177,6 +178,25 @@ export async function destroy(id: string) {
 		revalidatePath('/admin/posts')
 		revalidatePath('/')
 		return { success: true, message: messages.success.deleted }
+	} catch (error) {
+		return { success: false, message: formatError(error) }
+	}
+}
+
+export async function toggle(id: string) {
+	try {
+		const data = await prisma.post.findUnique({ where: { id } })
+		await prisma.post.update({
+			where: { id },
+			data: {
+				featured: !data?.featured,
+			},
+		})
+		revalidatePath('/admins/posts')
+		if (!data?.featured) {
+			revalidatePath('/')
+		}
+		return { success: true, message: messages.success.updated }
 	} catch (error) {
 		return { success: false, message: formatError(error) }
 	}

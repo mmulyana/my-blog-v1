@@ -54,7 +54,7 @@ export default function FormUpdate({
 			}
 		} else {
 			toast.success(res.message)
-			router.push(`/admin/posts`)
+			router.back()
 		}
 	}
 
