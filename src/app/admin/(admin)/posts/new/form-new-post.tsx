@@ -5,10 +5,11 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
-import { createPost } from '@/features/post/action'
-import { Post } from '@/features/post/schema'
-import { handleFieldErrors } from '@/lib/form'
 import FormPost from '@/features/post/components/form-post'
+import { create } from '@/features/post/action'
+import { Post } from '@/features/post/schema'
+
+import { handleFieldErrors } from '@/shared/lib/form'
 
 export default function FormNewPost({
 	categories,
@@ -30,7 +31,7 @@ export default function FormNewPost({
 
 	const onSubmit = async (data: Post) => {
 		setIsPending(true)
-		const res = await createPost(data)
+		const res = await create(data)
 		setIsPending(false)
 
 		if (!res.success) {

@@ -9,9 +9,9 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import ButtonSubmit from '@/components/common/button-submit'
+} from '@/shared/components/ui/form'
+import { Input } from '@/shared/components/ui/input'
+import ButtonSubmit from '@/shared/components/common/button-submit'
 
 export default function FormCategory({
 	form,

@@ -13,4 +13,8 @@ export const PostSchema = z.object({
 		.default([]),
 })
 
+export const PostUpdateSchema = PostSchema.extend({
+	id: z.string().min(1, 'ID tidak boleh kosong'),
+})
+
 export type Post = z.infer<typeof PostSchema>

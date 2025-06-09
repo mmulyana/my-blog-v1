@@ -1,6 +1,5 @@
-import { SafeHtmlRenderer } from '@/components/safe-html-renderer'
-
-import { readOne } from '@/features/post/action'
+import { SafeHtmlRenderer } from '@/shared/components/common/safe-html-renderer'
+import { read } from '@/features/post/action'
 import { redirect } from 'next/navigation'
 
 export default async function DetailPost({
@@ -9,7 +8,7 @@ export default async function DetailPost({
 	params: Promise<{ id: string }>
 }) {
 	const productId = (await params).id
-	const data = await readOne(productId)
+	const data = await read(productId)
 
 	if (!data) {
 		return redirect('/')

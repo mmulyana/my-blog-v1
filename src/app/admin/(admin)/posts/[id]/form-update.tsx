@@ -6,15 +6,18 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 
 import FormPost from '@/features/post/components/form-post'
-import { updatePost } from '@/features/post/action'
+import { update } from '@/features/post/action'
 import { Post } from '@/features/post/schema'
 
-import { handleFieldErrors } from '@/lib/form'
+import { handleFieldErrors } from '@/shared/lib/form'
+import AlertDestroyPost from '@/features/post/components/alert-destory-post'
 
 export default function FormUpdate({
 	data,
 	categories,
+	id,
 }: {
+	id?: string
 	data?: Omit<Post, 'categories'> & {
 		id: string
 		categories: {
@@ -40,7 +43,7 @@ export default function FormUpdate({
 	const onSubmit = async (payload: Post) => {
 		setIsPending(true)
 		if (!data?.id) return
-		const res = await updatePost({ ...payload, id: data.id })
+		const res = await update({ ...payload, id: data.id })
 		setIsPending(false)
 
 		if (!res.success) {
@@ -56,13 +59,12 @@ export default function FormUpdate({
 	}
 
 	return (
-		<div>
-			<FormPost
-				form={form}
-				onSubmit={onSubmit}
-				isPending={isPending}
-				categories={categories}
-			/>
-		</div>
+		<FormPost
+			id={id}
+			form={form}
+			onSubmit={onSubmit}
+			isPending={isPending}
+			categories={categories}
+		/>
 	)
 }

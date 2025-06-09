@@ -5,7 +5,7 @@ type props = {
 	isPending?: boolean
 	title?: string
 }
-export default function ButtonSubmit({ isPending, title = 'Simpan' }: props) {
+export default function ButtonSubmit({ isPending, title = 'Save' }: props) {
 	return (
 		<Button type='submit' disabled={isPending}>
 			{isPending ? (

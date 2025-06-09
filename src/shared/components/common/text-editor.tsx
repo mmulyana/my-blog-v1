@@ -12,9 +12,9 @@ import python from 'highlight.js/lib/languages/python'
 import css from 'highlight.js/lib/languages/css'
 import html from 'highlight.js/lib/languages/xml'
 import php from 'highlight.js/lib/languages/php'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
+import { Button } from '@/shared/components/ui/button'
+import { Input } from '@/shared/components/ui/input'
+import { Separator } from '@/shared/components/ui/separator'
 import {
 	Bold,
 	Italic,
@@ -38,8 +38,8 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from '@/components/ui/dialog'
-import { Label } from '@/components/ui/label'
+} from '@/shared/components/ui/dialog'
+import { Label } from '@/shared/components/ui/label'
 
 const lowlight = createLowlight()
 lowlight.register('javascript', javascript)
@@ -125,9 +125,9 @@ export default function TextEditor({
 
 	return (
 		<div className='w-full'>
-			<div className='border border-input rounded-lg overflow-hidden bg-white'>
+			<div className='border border-border rounded-lg overflow-hidden bg-white'>
 				{/* Toolbar */}
-				<div className='p-2 flex flex-wrap gap-1 border-b border-input'>
+				<div className='p-2 flex flex-wrap gap-1 border-b border-border'>
 					{/* Text Formatting */}
 					<Button
 						type='button'

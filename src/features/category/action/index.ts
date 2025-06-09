@@ -3,10 +3,10 @@
 import { revalidatePath } from 'next/cache'
 import { z, ZodError } from 'zod'
 
-import { getSessionOrThrow } from '@/lib/session'
-import { formatError } from '@/lib/utils'
-import { Pagination } from '@/types'
-import prisma from '@/lib/prisma'
+import { getSessionOrThrow } from '@/shared/lib/session'
+import { formatError } from '@/shared/lib/utils'
+import { Pagination } from '@/shared/types'
+import prisma from '@/shared/lib/prisma'
 
 import { CategorySchema } from '../schema'
 

@@ -6,8 +6,8 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import Link from 'next/link'
 
-import ButtonSubmit from '@/components/common/button-submit'
-import { Input } from '@/components/ui/input'
+import ButtonSubmit from '@/shared/components/common/button-submit'
+import { Input } from '@/shared/components/ui/input'
 import {
 	Card,
 	CardContent,
@@ -15,7 +15,7 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/components/ui/card'
+} from '@/shared/components/ui/card'
 import {
 	Form,
 	FormControl,
@@ -23,9 +23,9 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from '@/components/ui/form'
+} from '@/shared/components/ui/form'
 
-import { authClient } from '@/lib/auth-client'
+import { authClient } from '@/shared/lib/auth-client'
 
 export default function FormRegister() {
 	const router = useRouter()

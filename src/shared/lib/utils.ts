@@ -16,15 +16,12 @@ export function formatNumberWithDecimal(num: number): string {
 	return decimal ? `${int}.${decimal.padEnd(2, '0')}` : `${int}.00`
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function formatError(error: any): string {
 	if (error.name === 'ZodError') {
 		// Handle Zod error
-		const fieldErrors = Object.keys(error.errors).map((field) => {
-			const message = error.errors[field].message
-			return typeof message === 'string' ? message : JSON.stringify(message)
+		const fieldErrors = error.errors.map((err: any) => {
+			return err.message
 		})
-
 		return fieldErrors.join('. ')
 	} else if (
 		error.name === 'PrismaClientKnownRequestError' &&

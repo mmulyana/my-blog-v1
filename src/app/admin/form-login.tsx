@@ -7,7 +7,7 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/components/ui/card'
+} from '@/shared/components/ui/card'
 import Link from 'next/link'
 import {
 	Form,
@@ -16,12 +16,12 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+} from '@/shared/components/ui/form'
+import { Input } from '@/shared/components/ui/input'
 import { useForm } from 'react-hook-form'
-import { authClient } from '@/lib/auth-client'
+import { authClient } from '@/shared/lib/auth-client'
 import { useState } from 'react'
-import ButtonSubmit from '@/components/common/button-submit'
+import ButtonSubmit from '@/shared/components/common/button-submit'
 
 export default function FormLogin() {
 	const [isPending, setIsPending] = useState(false)

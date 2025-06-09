@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
-import { buttonVariants } from '@/components/ui/button'
-import { getSessionOrThrow } from '@/lib/session'
+import { buttonVariants } from '@/shared/components/ui/button'
+import { getSessionOrThrow } from '@/shared/lib/session'
 import { readAll } from '@/features/post/action'
 
 export default async function ProductsPage({

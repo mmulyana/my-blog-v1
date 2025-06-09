@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/shared/components/ui/button'
 import { Category } from '../schema'
 import { Pencil, Plus } from 'lucide-react'
 import {
@@ -10,12 +10,12 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from '@/components/ui/dialog'
+} from '@/shared/components/ui/dialog'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { create, update } from '../action'
 import { toast } from 'sonner'
-import { handleFieldErrors } from '@/lib/form'
+import { handleFieldErrors } from '@/shared/lib/form'
 import FormCategory from './form-category'
 
 export default function ModalCategory({

@@ -1,9 +1,5 @@
-import Link from 'next/link'
-
-import { buttonVariants } from '@/components/ui/button'
-import { readByPagination } from '@/features/category/action'
 import ModalCategory from '@/features/category/components/modal-category'
-import { Category } from '@/features/category/schema'
+import { readByPagination } from '@/features/category/action'
 
 export default async function CategoriesPage({
 	searchParams,
