@@ -55,7 +55,7 @@ export default function Tabs() {
 				/>
 
 				<div
-					className='absolute bottom-[-6px] h-0.5 bg-primary dark:bg-white transition-all duration-300 ease-out'
+					className='absolute bottom-[-12px] h-1 bg-primary dark:bg-white transition-all duration-300 ease-out'
 					style={activeStyle}
 				/>
 

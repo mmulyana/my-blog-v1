@@ -65,7 +65,7 @@ export default function CuisineSelector({
 							backgroundColor: { duration: 0.1 },
 						}}
 						className={cn(
-							'inline-flex items-center pl-3 pr-2.5 py-1.5 rounded-full text-base font-medium whitespace-nowrap overflow-hidden border-2 hover:scale-[1.04]',
+							'inline-flex items-center pl-3 pr-2.5 py-1.5 rounded-full text-sm font-medium whitespace-nowrap overflow-hidden border hover:scale-[1.04]',
 							isSelected
 								? 'text-white border-primary'
 								: 'text-foreground/80 border-border'

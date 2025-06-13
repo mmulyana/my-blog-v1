@@ -17,7 +17,6 @@ export default async function Page() {
 			id: i.id,
 			name: i.name,
 		})) || []
-	console.log('section', sections)
 
 	return <FormNewPost categories={categories} sections={sections} />
 }

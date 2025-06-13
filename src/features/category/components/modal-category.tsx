@@ -36,7 +36,7 @@ export default function ModalCategory({
 			</Button>
 		),
 		edit: (
-			<Button variant='outline'>
+			<Button variant='outline' className='hover:bg-accent'>
 				<Pencil size={18} />
 				<span>Edit</span>
 			</Button>

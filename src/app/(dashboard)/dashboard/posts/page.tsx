@@ -15,7 +15,7 @@ import {
 	TableRow,
 } from '@/shared/components/ui/table'
 import ToggleFeatured from '@/features/post/components/toggle-feature'
-import { ExternalLink, ImageIcon } from 'lucide-react'
+import { ExternalLink, ImageIcon, Pencil } from 'lucide-react'
 import Image from 'next/image'
 
 export default async function ProductsPage({
@@ -34,16 +34,17 @@ export default async function ProductsPage({
 	})
 
 	return (
-		<div className='max-w-5xl mx-auto space-y-4 py-8'>
+		<div className='max-w-5xl mx-auto space-y-4 mt-4'>
 			<div className='flex justify-between items-center'>
 				<h1 className='text-xl font-medium'>My posts</h1>
 				<Link
-					href={'/admin/posts/new'}
+					href={'/dashboard/posts/new'}
 					className={buttonVariants({
 						variant: 'default',
 						className: 'rounded-md',
 					})}
 				>
+					<Pencil size={18} />
 					New
 				</Link>
 			</div>
@@ -53,9 +54,7 @@ export default async function ProductsPage({
 						<TableHead className='bg-gray-200/50 rounded-l-md px-4'>
 							Thumbnail
 						</TableHead>
-						<TableHead className='bg-gray-200/50 rounded-l-md px-4'>
-							Name
-						</TableHead>
+						<TableHead className='bg-gray-200/50'>Name</TableHead>
 						<TableHead className='bg-gray-200/50'>Section</TableHead>
 						<TableHead className='bg-gray-200/50'>Category</TableHead>
 						<TableHead className='bg-gray-200/50'>Featured</TableHead>
@@ -81,7 +80,7 @@ export default async function ProductsPage({
 									</div>
 								)}
 							</TableCell>
-							<TableCell className='px-4'>
+							<TableCell>
 								<p className='text-foreground text-base'>{item.title}</p>
 							</TableCell>
 							<TableCell>
@@ -106,17 +105,17 @@ export default async function ProductsPage({
 									))}
 								</div>
 							</TableCell>
-							<TableCell className=''>
+							<TableCell>
 								<ToggleFeatured id={item.id} value={item.featured} />
 							</TableCell>
-							<TableCell className=''>
+							<TableCell>
 								<Badge variant='outline' className='rounded-full'>
 									{item.status}
 								</Badge>
 							</TableCell>
-							<TableCell className=''>
+							<TableCell>
 								<Link
-									href={`/admin/posts/${item.id}`}
+									href={`/dashboard/posts/${item.id}`}
 									className={buttonVariants({ variant: 'outline', size: 'sm' })}
 								>
 									Open

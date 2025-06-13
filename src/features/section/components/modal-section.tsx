@@ -41,7 +41,7 @@ export default function ModalSection({
 		default: (
 			<Button>
 				<Plus size={18} />
-				<span>Tambah</span>
+				<span>New</span>
 			</Button>
 		),
 		edit: (

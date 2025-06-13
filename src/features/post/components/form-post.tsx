@@ -23,6 +23,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/shared/components/ui/select'
+import { Separator } from '@/shared/components/ui/separator'
+import AlertPublishPost from './alert-publish-post'
+import { PostStatus } from '@prisma/client'
 
 export default function FormPost({
 	form,
@@ -31,6 +34,7 @@ export default function FormPost({
 	categories,
 	sections,
 	id,
+	status,
 }: {
 	id?: string
 	form: UseFormReturn<Post>
@@ -38,11 +42,12 @@ export default function FormPost({
 	isPending?: boolean
 	categories?: { id: string; name: string }[]
 	sections?: { id: string; name: string }[]
+	status?: PostStatus
 }) {
 	return (
 		<Form {...form}>
 			<form
-				className='max-w-6xl mx-auto p-4 pb-16'
+				className='max-w-6xl mx-auto mt-4 pb-8'
 				onSubmit={form.handleSubmit(onSubmit)}
 			>
 				<div className='grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6'>
@@ -52,7 +57,7 @@ export default function FormPost({
 							name='title'
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Judul</FormLabel>
+									<FormLabel>Title</FormLabel>
 									<FormControl>
 										<Input {...field} />
 									</FormControl>
@@ -75,6 +80,10 @@ export default function FormPost({
 								</FormItem>
 							)}
 						/>
+						<div className='w-full flex justify-end gap-4'>
+							{id && <AlertPublishPost status={status} id={id} />}
+							<ButtonSubmit isPending={isPending || false} />
+						</div>
 					</div>
 					<div className='p-6 rounded-xl bg-white space-y-5 border h-fit'>
 						<FormField
@@ -118,7 +127,7 @@ export default function FormPost({
 							name='categories'
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Kategori</FormLabel>
+									<FormLabel>Category</FormLabel>
 									<CuisineSelector
 										data={categories || []}
 										value={field.value || []}
@@ -127,20 +136,21 @@ export default function FormPost({
 								</FormItem>
 							)}
 						/>
+						{id && <Separator />}
+						{id && (
+							<div className='flex justify-between items-center mt-6'>
+								<div>
+									<p className='text-gray-800 text-sm font-medium'>
+										Delete Post
+									</p>
+									<p className='text-sm text-gray-400'>
+										This action cannot be undone.
+									</p>
+								</div>
+								<AlertDestroyPost id={id} />
+							</div>
+						)}
 					</div>
-				</div>
-				{id && (
-					<div>
-						<p className='text-red-400 text-sm'>
-							Warning! This action cannot be undone. Please make sure you are
-							absolutely sure before proceeding.
-						</p>
-						<AlertDestroyPost id={id} />
-					</div>
-				)}
-
-				<div className='bg-white fixed bottom-0 left-0 w-full h-16 border-t shadow-sm flex items-center justify-end px-4'>
-					<ButtonSubmit isPending={isPending || false} />
 				</div>
 			</form>
 		</Form>

@@ -11,6 +11,7 @@ import { Post } from '@/features/post/schema'
 
 import { handleFieldErrors } from '@/shared/lib/form'
 import { destroyImage, uploadImage } from '@/shared/utils'
+import { PostStatus } from '@prisma/client'
 
 export default function FormUpdate({
 	data,
@@ -25,6 +26,7 @@ export default function FormUpdate({
 			id: string
 			category: { id: string; name: string }
 		}[]
+		status: PostStatus
 	}
 	categories?: { id: string; name: string }[]
 	sections?: { id: string; name: string }[]
@@ -37,7 +39,6 @@ export default function FormUpdate({
 			title: data?.title,
 			content: data?.content,
 			featured: data?.featured,
-			status: data?.status,
 			file: data?.imgUrl as any,
 			imgUrl: data?.imgUrl,
 			categories: data?.categories?.map((i) => i.category.id),
@@ -86,6 +87,7 @@ export default function FormUpdate({
 			isPending={isPending}
 			categories={categories}
 			sections={sections}
+			status={data?.status}
 		/>
 	)
 }

@@ -47,22 +47,20 @@ export default async function DetailPost({
 		})) || []
 
 	return (
-		<div>
-			<FormUpdate
-				data={{
-					categories: data.categories,
-					content: data.content,
-					featured: data.featured,
-					id: data.id,
-					status: data.status,
-					title: data.title,
-					imgUrl: data.imageUrl,
-					section: data.sectionId || '',
-				}}
-				categories={categories}
-				id={postId}
-				sections={sections}
-			/>
-		</div>
+		<FormUpdate
+			data={{
+				categories: data.categories,
+				content: data.content,
+				featured: data.featured,
+				id: data.id,
+				status: data.status,
+				title: data.title,
+				imgUrl: data.imageUrl,
+				section: data.sectionId || '',
+			}}
+			categories={categories}
+			id={postId}
+			sections={sections}
+		/>
 	)
 }

@@ -9,7 +9,7 @@ import { Pagination } from '@/shared/types'
 import prisma from '@/shared/lib/prisma'
 
 import { PostSchema, PostUpdateSchema } from '../schema'
-import { Prisma } from '@prisma/client'
+import { PostStatus, Prisma } from '@prisma/client'
 import { messages } from '@/shared/constant/messages'
 
 export async function readAll({
@@ -128,7 +128,7 @@ export async function create(formData: unknown) {
 			},
 		})
 
-		revalidatePath('/admin/posts')
+		revalidatePath('/dashboard/posts')
 		return { success: true, message: messages.success.saved }
 	} catch (error) {
 		if (error instanceof ZodError) {
@@ -203,6 +203,25 @@ export async function toggle(id: string) {
 			where: { id },
 			data: {
 				featured: !data?.featured,
+			},
+		})
+		revalidatePath('/dashboard/posts')
+		if (!data?.featured) {
+			revalidatePath('/')
+		}
+		return { success: true, message: messages.success.updated }
+	} catch (error) {
+		return { success: false, message: formatError(error) }
+	}
+}
+
+export async function publish(id: string, status: PostStatus) {
+	try {
+		const data = await prisma.post.findUnique({ where: { id } })
+		await prisma.post.update({
+			where: { id },
+			data: {
+				status,
 			},
 		})
 		revalidatePath('/dashboard/posts')
