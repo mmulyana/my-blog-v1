@@ -1,7 +1,8 @@
 'use client'
 
 import { UseFormReturn } from 'react-hook-form'
-import { Category } from '../schema'
+import ButtonSubmit from '@/shared/components/common/button-submit'
+import { Input } from '@/shared/components/ui/input'
 import {
 	Form,
 	FormControl,
@@ -10,8 +11,8 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/shared/components/ui/form'
-import { Input } from '@/shared/components/ui/input'
-import ButtonSubmit from '@/shared/components/common/button-submit'
+
+import { Category } from '../schema'
 
 export default function FormCategory({
 	form,

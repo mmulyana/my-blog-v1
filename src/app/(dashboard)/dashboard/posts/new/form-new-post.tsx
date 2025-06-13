@@ -14,8 +14,10 @@ import { uploadImage } from '@/shared/utils'
 
 export default function FormNewPost({
 	categories,
+	sections,
 }: {
 	categories?: { id: string; name: string }[]
+	sections?: { id: string; name: string }[]
 }) {
 	const router = useRouter()
 	const [isPending, setIsPending] = useState(false)
@@ -61,6 +63,7 @@ export default function FormNewPost({
 			onSubmit={onSubmit}
 			isPending={isPending}
 			categories={categories}
+			sections={sections}
 		/>
 	)
 }

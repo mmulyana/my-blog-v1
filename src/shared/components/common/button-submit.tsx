@@ -7,7 +7,7 @@ type props = {
 }
 export default function ButtonSubmit({ isPending, title = 'Save' }: props) {
 	return (
-		<Button type='submit' disabled={isPending}>
+		<Button type='submit' disabled={isPending} className='w-full'>
 			{isPending ? (
 				<>
 					<Loader className='mr-2 h-4 w-4 animate-spin' />

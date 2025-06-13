@@ -94,7 +94,3 @@ export async function update(formData: unknown) {
 		return { success: false, message: formatError(error) }
 	}
 }
-
-export const read = async (id: string) => {
-	return await prisma.category.findUnique({ where: { id } })
-}

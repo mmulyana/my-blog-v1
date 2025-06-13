@@ -55,6 +55,12 @@ export async function readAll({
 				featured: true,
 				createdAt: true,
 				imgUrl: true,
+				section: {
+					select: {
+						id: true,
+						name: true,
+					},
+				},
 			},
 		}),
 		prisma.post.count({ where }),
@@ -110,6 +116,7 @@ export async function create(formData: unknown) {
 				status: parsed.status,
 				featured: parsed.featured,
 				createdBy: session.user.id,
+				sectionId: parsed.section,
 				imgUrl: parsed.imgUrl,
 				categories: {
 					create: parsed.categories.map((categoryId) => ({
@@ -150,6 +157,7 @@ export async function update(formData: unknown) {
 				status: parsed.status,
 				featured: parsed.featured,
 				imgUrl: parsed.imgUrl,
+				sectionId: parsed.section,
 				categories: {
 					deleteMany: {},
 					create: parsed.categories.map((categoryId) => ({
@@ -161,7 +169,7 @@ export async function update(formData: unknown) {
 			},
 		})
 
-		revalidatePath('/admin/posts')
+		revalidatePath('/dashboard/posts')
 		return { success: true, message: messages.success.updated }
 	} catch (error) {
 		if (error instanceof ZodError) {
@@ -180,7 +188,7 @@ export async function update(formData: unknown) {
 export async function destroy(id: string) {
 	try {
 		await prisma.post.update({ where: { id }, data: { deletedAt: new Date() } })
-		revalidatePath('/admin/posts')
+		revalidatePath('/dashboard/posts')
 		revalidatePath('/')
 		return { success: true, message: messages.success.deleted }
 	} catch (error) {
@@ -197,7 +205,7 @@ export async function toggle(id: string) {
 				featured: !data?.featured,
 			},
 		})
-		revalidatePath('/admins/posts')
+		revalidatePath('/dashboard/posts')
 		if (!data?.featured) {
 			revalidatePath('/')
 		}

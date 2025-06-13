@@ -1,7 +1,6 @@
 'use client'
 
 import { Button } from '@/shared/components/ui/button'
-import { Category } from '../schema'
 import { Pencil, Plus } from 'lucide-react'
 import {
 	Dialog,
@@ -13,16 +12,26 @@ import {
 } from '@/shared/components/ui/dialog'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { create, update } from '../action'
 import { toast } from 'sonner'
 import { handleFieldErrors } from '@/shared/lib/form'
-import FormCategory from './form-category'
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from '@/shared/components/ui/form'
+import { Input } from '@/shared/components/ui/input'
+import ButtonSubmit from '@/shared/components/common/button-submit'
+import { Section } from '../schema'
+import { create, update } from '../action'
 
-export default function ModalCategory({
+export default function ModalSection({
 	data,
 	variant = 'default',
 }: {
-	data?: Category & { id: string }
+	data?: Section & { id: string }
 	variant?: 'default' | 'edit'
 }) {
 	const [open, setOpen] = useState(false)
@@ -48,7 +57,7 @@ export default function ModalCategory({
 		name: '',
 	}
 
-	const form = useForm<Category>({
+	const form = useForm<Section>({
 		defaultValues,
 	})
 
@@ -56,7 +65,6 @@ export default function ModalCategory({
 		if (open && data) {
 			form.reset({
 				name: data.name,
-				color: data.color,
 			})
 		}
 
@@ -65,7 +73,7 @@ export default function ModalCategory({
 		}
 	}, [data, open])
 
-	const onSubmit = async (payload: Category) => {
+	const onSubmit = async (payload: Section) => {
 		setIsPending(true)
 		let res = undefined
 		if (variant === 'default') {
@@ -92,10 +100,28 @@ export default function ModalCategory({
 			<DialogTrigger asChild>{buttonTrigger[variant]}</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Kategori</DialogTitle>
+					<DialogTitle>Section</DialogTitle>
 					<DialogDescription></DialogDescription>
 				</DialogHeader>
-				<FormCategory form={form} onSubmit={onSubmit} isPending={isPending} />
+				<Form {...form}>
+					<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+						<FormField
+							control={form.control}
+							name='name'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Nama</FormLabel>
+									<FormControl>
+										<Input {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+
+						<ButtonSubmit isPending={isPending} />
+					</form>
+				</Form>
 			</DialogContent>
 		</Dialog>
 	)

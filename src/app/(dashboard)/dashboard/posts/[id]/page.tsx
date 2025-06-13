@@ -1,6 +1,7 @@
-import { readAll } from '@/features/category/action'
 import { read } from '@/features/post/action'
 import FormUpdate from './form-update'
+import { readAll as readAllCategories } from '@/features/category/action'
+import { readAll as readAllSections } from '@/features/section/action'
 
 export default async function DetailPost({
 	params,
@@ -9,7 +10,8 @@ export default async function DetailPost({
 }) {
 	const postId = (await params).id
 	const res = await read(postId)
-	const categoryRes = await readAll()
+	const categoryRes = await readAllCategories()
+	const sectionRes = await readAllSections()
 
 	if (!res) {
 		return <div>Produk tidak ditemukan.</div>
@@ -29,10 +31,17 @@ export default async function DetailPost({
 		status: res.status,
 		title: res.title,
 		imageUrl: res.imgUrl,
+		sectionId: res.sectionId,
 	}
 
 	const categories =
 		categoryRes?.data?.map((i) => ({
+			id: i.id,
+			name: i.name,
+		})) || []
+
+	const sections =
+		sectionRes.data.map((i) => ({
 			id: i.id,
 			name: i.name,
 		})) || []
@@ -48,9 +57,11 @@ export default async function DetailPost({
 					status: data.status,
 					title: data.title,
 					imgUrl: data.imageUrl,
+					section: data.sectionId || '',
 				}}
 				categories={categories}
 				id={postId}
+				sections={sections}
 			/>
 		</div>
 	)

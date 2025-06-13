@@ -56,6 +56,7 @@ export default async function ProductsPage({
 						<TableHead className='bg-gray-200/50 rounded-l-md px-4'>
 							Name
 						</TableHead>
+						<TableHead className='bg-gray-200/50'>Section</TableHead>
 						<TableHead className='bg-gray-200/50'>Category</TableHead>
 						<TableHead className='bg-gray-200/50'>Featured</TableHead>
 						<TableHead className='bg-gray-200/50'>Status</TableHead>
@@ -72,7 +73,7 @@ export default async function ProductsPage({
 										width={120}
 										height={80}
 										alt='thumbnail'
-										className='rounded-lg'
+										className='rounded-lg h-24 w-32 object-cover object-center'
 									/>
 								) : (
 									<div className='rounded-lg bg-gray-200 w-[120px] h-20 flex justify-center items-center'>
@@ -83,7 +84,12 @@ export default async function ProductsPage({
 							<TableCell className='px-4'>
 								<p className='text-foreground text-base'>{item.title}</p>
 							</TableCell>
-							<TableCell className=''>
+							<TableCell>
+								<p className='text-foreground text-base'>
+									{item?.section?.name}
+								</p>
+							</TableCell>
+							<TableCell>
 								<div className='flex gap-2 flex-wrap max-w-[320px]'>
 									{item.categories.map((i) => (
 										<Badge

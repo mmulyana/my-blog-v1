@@ -4,7 +4,7 @@ export default function ToastWrapper({ children }: React.PropsWithChildren) {
 	return (
 		<>
 			{children}
-			<Toaster />
+			<Toaster richColors theme='light' />
 		</>
 	)
 }

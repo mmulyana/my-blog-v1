@@ -16,12 +16,20 @@ import {
 import { Post } from '../schema'
 import AlertDestroyPost from './alert-destory-post'
 import ImageUploader from '@/shared/components/common/image-uploader'
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/shared/components/ui/select'
 
 export default function FormPost({
 	form,
 	onSubmit,
 	isPending,
 	categories,
+	sections,
 	id,
 }: {
 	id?: string
@@ -29,6 +37,7 @@ export default function FormPost({
 	onSubmit: (data: Post) => void
 	isPending?: boolean
 	categories?: { id: string; name: string }[]
+	sections?: { id: string; name: string }[]
 }) {
 	return (
 		<Form {...form}>
@@ -78,6 +87,29 @@ export default function FormPost({
 										value={field.value}
 										onChange={field.onChange}
 									/>
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name='section'
+							render={({ field }) => (
+								<FormItem className='w-full'>
+									<FormLabel>Section</FormLabel>
+									<Select value={field.value} onValueChange={field.onChange}>
+										<FormControl>
+											<SelectTrigger className='w-full'>
+												<SelectValue placeholder='Select section' />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											{sections?.map((i) => (
+												<SelectItem key={i.id} value={i.id}>
+													{i.name}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
 								</FormItem>
 							)}
 						/>

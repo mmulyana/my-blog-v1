@@ -8,16 +8,19 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String   @id
   name          String
-  email         String    @unique
+  email         String   @unique
   emailVerified Boolean
   image         String?
+  bio           String?
   createdAt     DateTime
   updatedAt     DateTime
-  posts         Post[]
-  accounts      Account[]
-  sessions      Session[]
+
+  posts    Post[]
+  accounts Account[]
+  sessions Session[]
+  contactc Contact[]
 
   @@map("user")
 }
@@ -117,4 +120,16 @@ enum PostStatus {
   SOFT_PUBLISHED
   DRAFT
   HIDDEN
+}
+
+model Contact {
+  id    String @id @default(ulid())
+  type  String
+  value String
+
+  userId String
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("contacts")
 }

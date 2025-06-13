@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
 
 import { auth } from '@/shared/lib/auth'
-import FormLogin from './form-login'
+import FormAuth from '@/features/auth/components/form-auth'
 
 export default async function Page() {
 	const session = await auth.api.getSession({
@@ -12,8 +12,8 @@ export default async function Page() {
 	})
 
 	if (session) {
-		return redirect('/admin/posts')
+		return redirect('/dashboard/posts')
 	}
 
-	return <FormLogin />
+	return <FormAuth variant='login' />
 }

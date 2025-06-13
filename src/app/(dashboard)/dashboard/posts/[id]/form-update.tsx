@@ -16,6 +16,7 @@ export default function FormUpdate({
 	data,
 	categories,
 	id,
+	sections,
 }: {
 	id?: string
 	data?: Omit<Post, 'categories' | 'imageUrl' | 'file'> & {
@@ -26,6 +27,7 @@ export default function FormUpdate({
 		}[]
 	}
 	categories?: { id: string; name: string }[]
+	sections?: { id: string; name: string }[]
 }) {
 	const router = useRouter()
 	const [isPending, setIsPending] = useState(false)
@@ -39,6 +41,7 @@ export default function FormUpdate({
 			file: data?.imgUrl as any,
 			imgUrl: data?.imgUrl,
 			categories: data?.categories?.map((i) => i.category.id),
+			section: data?.section,
 		},
 	})
 
@@ -82,6 +85,7 @@ export default function FormUpdate({
 			onSubmit={onSubmit}
 			isPending={isPending}
 			categories={categories}
+			sections={sections}
 		/>
 	)
 }

@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 import ToastWrapper from '@/shared/components/common/toast-wrapper'
+import { checkProfile } from '@/features/auth/action'
+import { redirect } from 'next/navigation'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',

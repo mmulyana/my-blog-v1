@@ -1,5 +1,6 @@
 import ModalCategory from '@/features/category/components/modal-category'
 import { readByPagination } from '@/features/category/action'
+import Pagination from '@/shared/components/common/pagination'
 
 export default async function CategoriesPage({
 	searchParams,
@@ -33,6 +34,7 @@ export default async function CategoriesPage({
 						</div>
 					)
 				})}
+				<Pagination page={page} totalPages={pagination.totalPages} />
 			</div>
 		</div>
 	)
