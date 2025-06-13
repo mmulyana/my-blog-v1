@@ -1,6 +1,6 @@
 import { buttonVariants } from '@/shared/components/ui/button'
 import { readAll } from '@/features/post/action'
-import { diffForHumans } from '@/shared/lib/utils'
+import { diffForHumans } from '@/shared/utils'
 import Link from 'next/link'
 
 export default async function Home({

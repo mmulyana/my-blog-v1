@@ -45,3 +45,38 @@ export function diffForHumans(targetDate: Date) {
 
 	return formatDistanceToNow(targetDate, { addSuffix: true, locale: id })
 }
+
+export async function uploadImage(file: File): Promise<string | null> {
+	const formData = new FormData()
+	formData.append('file', file)
+
+	const res = await fetch('/api/image-upload', {
+		method: 'POST',
+		body: formData,
+	})
+
+	if (!res.ok) {
+		console.error('Upload failed:', res.statusText)
+		return null
+	}
+
+	const uploadRes = await res.json()
+	return uploadRes.url ?? null
+}
+
+export async function destroyImage(url: string): Promise<void> {
+	const res = await fetch('/api/delete-image', {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ secure_url: url }),
+	})
+
+	if (!res.ok) {
+		console.error('Destroy failed', res.statusText)
+		return
+	}
+
+	await res.json()
+}

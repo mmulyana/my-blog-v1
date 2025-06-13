@@ -28,6 +28,7 @@ export default async function DetailPost({
 		id: res.id,
 		status: res.status,
 		title: res.title,
+		imageUrl: res.imgUrl,
 	}
 
 	const categories =
@@ -38,7 +39,19 @@ export default async function DetailPost({
 
 	return (
 		<div>
-			<FormUpdate data={data} categories={categories} id={postId} />
+			<FormUpdate
+				data={{
+					categories: data.categories,
+					content: data.content,
+					featured: data.featured,
+					id: data.id,
+					status: data.status,
+					title: data.title,
+					imgUrl: data.imageUrl,
+				}}
+				categories={categories}
+				id={postId}
+			/>
 		</div>
 	)
 }

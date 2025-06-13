@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { z, ZodError } from 'zod'
 
 import { getSessionOrThrow } from '@/shared/lib/session'
-import { formatError } from '@/shared/lib/utils'
+import { formatError } from '@/shared/utils'
 import { Pagination } from '@/shared/types'
 import prisma from '@/shared/lib/prisma'
 
@@ -54,6 +54,7 @@ export async function readAll({
 				},
 				featured: true,
 				createdAt: true,
+				imgUrl: true,
 			},
 		}),
 		prisma.post.count({ where }),
@@ -79,6 +80,8 @@ export async function read(id: string) {
 			content: true,
 			featured: true,
 			status: true,
+			imgUrl: true,
+			sectionId: true,
 
 			categories: {
 				select: {
@@ -107,6 +110,7 @@ export async function create(formData: unknown) {
 				status: parsed.status,
 				featured: parsed.featured,
 				createdBy: session.user.id,
+				imgUrl: parsed.imgUrl,
 				categories: {
 					create: parsed.categories.map((categoryId) => ({
 						category: {
@@ -145,6 +149,7 @@ export async function update(formData: unknown) {
 				content: parsed.content,
 				status: parsed.status,
 				featured: parsed.featured,
+				imgUrl: parsed.imgUrl,
 				categories: {
 					deleteMany: {},
 					create: parsed.categories.map((categoryId) => ({

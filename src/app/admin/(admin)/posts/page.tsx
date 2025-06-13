@@ -15,7 +15,8 @@ import {
 	TableRow,
 } from '@/shared/components/ui/table'
 import ToggleFeatured from '@/features/post/components/toggle-feature'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, ImageIcon } from 'lucide-react'
+import Image from 'next/image'
 
 export default async function ProductsPage({
 	searchParams,
@@ -50,6 +51,9 @@ export default async function ProductsPage({
 				<TableHeader>
 					<TableRow className='border-none'>
 						<TableHead className='bg-gray-200/50 rounded-l-md px-4'>
+							Thumbnail
+						</TableHead>
+						<TableHead className='bg-gray-200/50 rounded-l-md px-4'>
 							Name
 						</TableHead>
 						<TableHead className='bg-gray-200/50'>Category</TableHead>
@@ -61,6 +65,21 @@ export default async function ProductsPage({
 				<TableBody>
 					{data.map((item) => (
 						<TableRow key={item.id}>
+							<TableCell className='px-4'>
+								{item.imgUrl ? (
+									<Image
+										src={item.imgUrl}
+										width={120}
+										height={80}
+										alt='thumbnail'
+										className='rounded-lg'
+									/>
+								) : (
+									<div className='rounded-lg bg-gray-200 w-[120px] h-20 flex justify-center items-center'>
+										<ImageIcon size={24} />
+									</div>
+								)}
+							</TableCell>
 							<TableCell className='px-4'>
 								<p className='text-foreground text-base'>{item.title}</p>
 							</TableCell>

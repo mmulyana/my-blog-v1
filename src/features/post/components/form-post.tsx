@@ -15,6 +15,7 @@ import {
 
 import { Post } from '../schema'
 import AlertDestroyPost from './alert-destory-post'
+import ImageUploader from '@/shared/components/common/image-uploader'
 
 export default function FormPost({
 	form,
@@ -32,51 +33,70 @@ export default function FormPost({
 	return (
 		<Form {...form}>
 			<form
-				className='max-w-4xl mx-auto p-4 space-y-5 pb-16'
+				className='max-w-6xl mx-auto p-4 pb-16'
 				onSubmit={form.handleSubmit(onSubmit)}
 			>
-				<FormField
-					control={form.control}
-					name='title'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Judul</FormLabel>
-							<FormControl>
-								<Input className='bg-white' {...field} />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='content'
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<TextEditor
-									defaultValue={field.value}
-									onChange={field.onChange}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name='categories'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Kategori</FormLabel>
-							<CuisineSelector
-								data={categories || []}
-								value={field.value || []}
-								onChange={field.onChange}
-							/>
-						</FormItem>
-					)}
-				/>
+				<div className='grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6'>
+					<div className='p-6 rounded-xl bg-white space-y-5 border'>
+						<FormField
+							control={form.control}
+							name='title'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Judul</FormLabel>
+									<FormControl>
+										<Input {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name='content'
+							render={({ field }) => (
+								<FormItem>
+									<FormControl>
+										<TextEditor
+											defaultValue={field.value}
+											onChange={field.onChange}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</div>
+					<div className='p-6 rounded-xl bg-white space-y-5 border h-fit'>
+						<FormField
+							control={form.control}
+							name='file'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Photo</FormLabel>
+									<ImageUploader
+										value={field.value}
+										onChange={field.onChange}
+									/>
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name='categories'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Kategori</FormLabel>
+									<CuisineSelector
+										data={categories || []}
+										value={field.value || []}
+										onChange={field.onChange}
+									/>
+								</FormItem>
+							)}
+						/>
+					</div>
+				</div>
 				{id && (
 					<div>
 						<p className='text-red-400 text-sm'>

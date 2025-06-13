@@ -81,17 +81,18 @@ export default function TextEditor({
 				},
 			}),
 		],
-		content: defaultValue ?? '', // Prioritas: value > defaultValue > ''
+		content: defaultValue ?? '',
 		onUpdate: ({ editor }) => {
 			const html = editor.getHTML()
 			onChange?.(html)
 		},
 		editorProps: {
 			attributes: {
-				class: 'prose p-4 max-w-full bg-white',
+				class: 'prose p-4 max-w-full bg-gray-50 min-h-[400px]',
 				spellcheck: 'false',
 			},
 		},
+		immediatelyRender: false,
 	})
 
 	const addImage = () => {
@@ -323,9 +324,7 @@ export default function TextEditor({
 				</div>
 
 				{/* Editor Content */}
-				<div className='min-h-[400px]'>
-					<EditorContent editor={editor} />
-				</div>
+				<EditorContent editor={editor} />
 			</div>
 		</div>
 	)
