@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { z, ZodError } from 'zod'
 
 import { getSessionOrThrow } from '@/shared/lib/session'
-import { formatError } from '@/shared/lib/utils'
+import { formatError } from '@/shared/utils'
 import { Pagination } from '@/shared/types'
 import prisma from '@/shared/lib/prisma'
 

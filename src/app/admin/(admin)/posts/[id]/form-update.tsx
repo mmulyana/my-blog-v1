@@ -10,7 +10,7 @@ import { update } from '@/features/post/action'
 import { Post } from '@/features/post/schema'
 
 import { handleFieldErrors } from '@/shared/lib/form'
-import AlertDestroyPost from '@/features/post/components/alert-destory-post'
+import { destroyImage, uploadImage } from '@/shared/utils'
 
 export default function FormUpdate({
 	data,
@@ -18,7 +18,7 @@ export default function FormUpdate({
 	id,
 }: {
 	id?: string
-	data?: Omit<Post, 'categories'> & {
+	data?: Omit<Post, 'categories' | 'imageUrl' | 'file'> & {
 		id: string
 		categories: {
 			id: string
@@ -36,6 +36,8 @@ export default function FormUpdate({
 			content: data?.content,
 			featured: data?.featured,
 			status: data?.status,
+			file: data?.imgUrl as any,
+			imgUrl: data?.imgUrl,
 			categories: data?.categories?.map((i) => i.category.id),
 		},
 	})
@@ -43,6 +45,21 @@ export default function FormUpdate({
 	const onSubmit = async (payload: Post) => {
 		setIsPending(true)
 		if (!data?.id) return
+
+		if (!payload.file) {
+			if (typeof payload.imgUrl == 'string' && payload.imgUrl !== '')
+				await destroyImage(payload.imgUrl)
+			payload.imgUrl = ''
+		} else if (typeof payload.file == 'string') {
+			payload.file = null
+		} else if (payload.file instanceof File) {
+			if (typeof payload.imgUrl == 'string' && payload.imgUrl !== '')
+				await destroyImage(payload.imgUrl)
+
+			const uploadedUrl = await uploadImage(payload.file)
+			payload.imgUrl = uploadedUrl
+		}
+
 		const res = await update({ ...payload, id: data.id })
 		setIsPending(false)
 

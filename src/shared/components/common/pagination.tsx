@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@/shared/utils'
 import Link from 'next/link'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'

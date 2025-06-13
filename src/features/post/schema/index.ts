@@ -1,5 +1,11 @@
 import { z } from 'zod'
 
+const FileSchema = z
+	.instanceof(File, { message: 'File tidak valid' })
+	.refine((file) => file.size > 0, {
+		message: 'File tidak boleh kosong',
+	})
+
 export const PostSchema = z.object({
 	title: z.string().min(1, 'Tidak boleh kosong'),
 	content: z.string().min(1, 'Tidak boleh kosong'),
@@ -11,6 +17,9 @@ export const PostSchema = z.object({
 	categories: z
 		.array(z.string().min(1, 'Category tidak boleh kosong'))
 		.default([]),
+	imgUrl: z.string().nullable().optional(),
+
+	file: z.union([FileSchema, z.string(), z.null()]).optional(),
 })
 
 export const PostUpdateSchema = PostSchema.extend({

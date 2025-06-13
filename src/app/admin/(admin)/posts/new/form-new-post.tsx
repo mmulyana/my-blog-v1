@@ -10,6 +10,7 @@ import { create } from '@/features/post/action'
 import { Post } from '@/features/post/schema'
 
 import { handleFieldErrors } from '@/shared/lib/form'
+import { uploadImage } from '@/shared/utils'
 
 export default function FormNewPost({
 	categories,
@@ -26,11 +27,19 @@ export default function FormNewPost({
 			featured: false,
 			status: 'DRAFT',
 			categories: [],
+			imgUrl: '',
+			file: undefined,
 		},
 	})
 
 	const onSubmit = async (data: Post) => {
 		setIsPending(true)
+
+		if (data.file instanceof File) {
+			const uploadedUrl = await uploadImage(data.file)
+			data.imgUrl = uploadedUrl
+		}
+
 		const res = await create(data)
 		setIsPending(false)
 

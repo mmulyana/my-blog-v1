@@ -67,16 +67,22 @@ model Verification {
 }
 
 model Post {
-  id         String         @id @default(ulid())
-  title      String         @db.VarChar(255)
-  content    String
-  status     PostStatus     @default(DRAFT)
-  featured   Boolean        @default(false)
-  createdAt  DateTime       @default(now())
-  updatedAt  DateTime       @updatedAt
-  deletedAt  DateTime?
-  createdBy  String
-  user       User           @relation(fields: [createdBy], references: [id])
+  id       String     @id @default(ulid())
+  title    String     @db.VarChar(255)
+  content  String
+  status   PostStatus @default(DRAFT)
+  featured Boolean    @default(false)
+  imgUrl   String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String
+  sectionId String?
+
+  user    User     @relation(fields: [createdBy], references: [id])
+  section Section? @relation(fields: [sectionId], references: [id])
+
   categories PostCategory[]
 }
 
@@ -98,6 +104,12 @@ model PostCategory {
   post       Post     @relation(fields: [postId], references: [id])
 
   @@unique([postId, categoryId])
+}
+
+model Section {
+  id    String @id @default(ulid())
+  name  String @db.VarChar(100)
+  posts Post[]
 }
 
 enum PostStatus {
