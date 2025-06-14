@@ -1,46 +1,64 @@
 'use client'
 
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { cn } from '@/shared/utils'
-import Link from 'next/link'
 import { Button } from '../ui/button'
-import { useRouter } from 'next/navigation'
 
-interface PaginationProps {
-	page: number
+type props = {
 	totalPages: number
 }
 
-export default function Pagination({ page, totalPages }: PaginationProps) {
+export default function Pagination({ totalPages }: props) {
 	const router = useRouter()
+	const pathname = usePathname()
+	const searchParams = useSearchParams()
+
+	const currentPage = Number(searchParams.get('page')) || 1
+
+	const handleSetPage = (newPage: number) => {
+		if (newPage < 1 || newPage > totalPages) return
+
+		const currentParams = new URLSearchParams(
+			Array.from(searchParams.entries())
+		)
+		currentParams.set('page', String(newPage))
+
+		const search = currentParams.toString()
+		const query = search ? `?${search}` : ''
+
+		router.replace(`${pathname}${query}`)
+	}
+
 	const renderPageNumbers = () => {
 		const pages = []
 		for (let i = 1; i <= totalPages; i++) {
 			pages.push(
-				<Link
+				<Button
+					variant='outline'
 					key={i}
-					href={`?page=${i}`}
+					onClick={() => handleSetPage(i)}
 					className={cn(
-						'px-3 py-1 mx-1 rounded-md border',
-						page === i
-							? 'bg-primary text-white border-primary'
+						'px-3 py-1 mx-1 rounded-md border cursor-pointer',
+						currentPage === i
+							? 'bg-primary text-white border-primary hover:bg-primary hover:text-white'
 							: 'bg-white text-foreground border-gray-200'
 					)}
 				>
 					{i}
-				</Link>
+				</Button>
 			)
 		}
 		return pages
 	}
 
-	const isPrevDisabled = page <= 1
-	const isNextDisabled = page >= totalPages
+	const isPrevDisabled = currentPage <= 1
+	const isNextDisabled = currentPage >= totalPages
 
 	return (
 		<div className='flex items-center justify-center mt-4'>
 			<Button
 				variant='outline'
-				onClick={() => router.push(`?page=${page - 1}`)}
+				onClick={() => handleSetPage(currentPage - 1)}
 				className={cn(
 					'px-3 py-1 mx-1 rounded-md',
 					isPrevDisabled
@@ -53,10 +71,8 @@ export default function Pagination({ page, totalPages }: PaginationProps) {
 			</Button>
 			<div className='flex'>{renderPageNumbers()}</div>
 			<Button
-				onClick={() => {
-					router.push(`?page=${page + 1}`)
-				}}
 				variant='outline'
+				onClick={() => handleSetPage(currentPage + 1)}
 				className={cn(
 					'px-3 py-1 mx-1 rounded-md',
 					isNextDisabled

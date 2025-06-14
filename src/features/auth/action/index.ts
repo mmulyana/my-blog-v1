@@ -5,7 +5,7 @@ import { getSessionOrThrow } from '@/shared/lib/session'
 import { messages } from '@/shared/constant/messages'
 import { formatError } from '@/shared/utils'
 
-export const checkProfile = async () => {
+export async function checkProfile() {
 	const data = await prisma.user.findMany()
 
 	return data.length > 0
@@ -33,4 +33,9 @@ export async function updateProfile(data: any) {
 	} catch (error) {
 		return { success: false, message: formatError(error) }
 	}
+}
+
+export async function readAuthor() {
+	const data = await prisma.user.findMany()
+	return data[0]
 }

@@ -53,7 +53,7 @@ export default function FormNewPost({
 			}
 		} else {
 			toast.success(res.message)
-			router.push(`/admin/posts`)
+			router.push(`/dashboard/posts`)
 		}
 	}
 

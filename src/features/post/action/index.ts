@@ -16,14 +16,20 @@ export async function readAll({
 	page,
 	limit,
 	createdBy,
+	sectionId,
+	featured,
 }: Pagination & {
 	createdBy?: string
+	sectionId?: string
+	featured?: boolean
 }) {
 	const skip = (page - 1) * limit
 
 	const where: Prisma.PostWhereInput = {
 		AND: [
 			createdBy ? { createdBy } : {},
+			sectionId ? { sectionId } : {},
+			featured ? { featured } : {},
 			{
 				deletedAt: null,
 			},
@@ -135,7 +141,7 @@ export async function create(formData: unknown) {
 			const fieldErrors = error.flatten().fieldErrors
 			return {
 				success: false,
-				message: 'Validasi gagal',
+				message: messages.validation.general,
 				errors: fieldErrors,
 			}
 		}

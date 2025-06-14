@@ -2,9 +2,8 @@ import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
 import { auth } from '@/shared/lib/auth'
 import Tabs from '@/shared/components/common/tabs'
-import { Button, buttonVariants } from '@/shared/components/ui/button'
-import Link from 'next/link'
 import UserMenu from '@/features/auth/components/user-menu'
+import { Suspense } from 'react'
 
 export default async function Layout({ children }: React.PropsWithChildren) {
 	const session = await auth.api.getSession({
@@ -12,7 +11,7 @@ export default async function Layout({ children }: React.PropsWithChildren) {
 	})
 
 	if (!session) {
-		return redirect('/admin')
+		return redirect('/login')
 	}
 
 	return (
@@ -21,7 +20,7 @@ export default async function Layout({ children }: React.PropsWithChildren) {
 				<Tabs />
 				<UserMenu />
 			</div>
-			<div className='max-w-5xl mx-auto '>{children}</div>
+			<div className='max-w-5xl mx-auto'>{children}</div>
 		</div>
 	)
 }

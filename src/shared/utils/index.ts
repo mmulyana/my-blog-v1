@@ -43,7 +43,7 @@ export function diffForHumans(targetDate: Date) {
 		return ''
 	}
 
-	return formatDistanceToNow(targetDate, { addSuffix: true, locale: id })
+	return formatDistanceToNow(targetDate, { addSuffix: true })
 }
 
 export async function uploadImage(file: File): Promise<string | null> {

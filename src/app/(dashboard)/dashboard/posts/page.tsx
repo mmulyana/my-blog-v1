@@ -75,7 +75,7 @@ export default async function ProductsPage({
 										className='rounded-lg h-24 w-32 object-cover object-center'
 									/>
 								) : (
-									<div className='rounded-lg bg-gray-200 w-[120px] h-20 flex justify-center items-center'>
+									<div className='rounded-lg bg-gray-200 w-32 h-24 flex justify-center items-center'>
 										<ImageIcon size={24} />
 									</div>
 								)}
@@ -126,7 +126,7 @@ export default async function ProductsPage({
 					))}
 				</TableBody>
 			</Table>
-			<Pagination page={page} totalPages={pagination.totalPages} />
+			<Pagination totalPages={pagination.totalPages} />
 		</div>
 	)
 }
