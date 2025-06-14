@@ -1,3 +1,4 @@
+import { Trash } from 'lucide-react'
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -17,17 +18,22 @@ export function AlertV1({
 	subtitle = 'This action cannot be undone. This will permanently delete your data from our servers.',
 	callback,
 	className,
+	icon = false,
 }: {
 	label?: string
 	title?: string
 	subtitle?: string
 	callback?: () => void
 	className?: string
+	icon?: boolean
 }) {
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger asChild>
-				<Button className={className}>{label}</Button>
+				<Button className={className}>
+					{icon && <Trash className='border' size={18} />}
+					{label}
+				</Button>
 			</AlertDialogTrigger>
 			<AlertDialogContent>
 				<AlertDialogHeader>

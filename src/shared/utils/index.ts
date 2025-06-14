@@ -80,3 +80,7 @@ export async function destroyImage(url: string): Promise<void> {
 
 	await res.json()
 }
+
+export function removeHttp(url: string): string {
+	return url.replace(/^https?:\/\/(www\.)?/, '')
+}

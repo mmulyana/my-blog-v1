@@ -11,7 +11,10 @@ export default function Tabs2({
 	const router = useRouter()
 	const params = useParams()
 	return (
-		<Tabs defaultValue={params.section as string} className='max-w-xl'>
+		<Tabs
+			defaultValue={(params.section as string) || 'all'}
+			className='max-w-xl'
+		>
 			<TabsList className='relative h-auto w-full gap-0.5 bg-transparent p-0 justify-start'>
 				{sections.map((i) => (
 					<TabsTrigger

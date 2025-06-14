@@ -15,37 +15,21 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu'
+import Link from 'next/link'
+import { Session, User } from 'better-auth'
 
-export default function UserMenu() {
-	const { data, isPending } = authClient.useSession()
-
-	if (isPending) {
-		return (
-			<div className='flex gap-2 items-center'>
-				<Skeleton className='h-10 w-10' />
-				<div className='flex flex-col justify-center items-start'>
-					<Skeleton className='w-20 h-4 rounded' />
-					<Skeleton className='w-28 h-4 mt-1 rounded' />
-				</div>
-			</div>
-		)
-	}
-
+export default function UserMenu({ user }: { user: User }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<div className='flex gap-2 items-center'>
 					<Avatar className='h-10 w-10 rounded-full'>
-						<AvatarImage
-							height={180}
-							width={180}
-							src={data?.user.image as string}
-						/>
-						<AvatarFallback>{data?.user.name.at(1)}</AvatarFallback>
+						<AvatarImage height={180} width={180} src={user.image as string} />
+						<AvatarFallback>{user.name.at(1)}</AvatarFallback>
 					</Avatar>
 					<div className='flex flex-col justify-center items-start'>
-						<p className='text-gray-900'>{data?.user.name}</p>
-						<p className='text-sm text-gray-500'>{data?.user.email}</p>
+						<p className='text-gray-900'>{user.name}</p>
+						<p className='text-sm text-gray-500'>{user.email}</p>
 					</div>
 					<ChevronDown size={20} />
 				</div>
@@ -54,7 +38,9 @@ export default function UserMenu() {
 				className='w-[var(--radix-popper-anchor-width)]'
 				align='end'
 			>
-				<DropdownMenuItem>Open profile</DropdownMenuItem>
+				<DropdownMenuItem asChild>
+					<Link href={'/profile'}>Open profile</Link>
+				</DropdownMenuItem>
 				<Separator />
 			</DropdownMenuContent>
 		</DropdownMenu>

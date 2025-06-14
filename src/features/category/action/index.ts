@@ -9,6 +9,7 @@ import { Pagination } from '@/shared/types'
 import prisma from '@/shared/lib/prisma'
 
 import { CategorySchema } from '../schema'
+import { messages } from '@/shared/constant/messages'
 
 export const readAll = async () => {
 	const data = await prisma.category.findMany({
@@ -50,8 +51,9 @@ export async function create(formData: unknown) {
 			data,
 		})
 
-		revalidatePath('/admin/categories')
-		return { success: true, message: 'Berhasil disimpan' }
+		revalidatePath('/')
+		revalidatePath('/profile')
+		return { success: true, message: messages.success.saved }
 	} catch (error) {
 		if (error instanceof ZodError) {
 			const fieldErrors = error.flatten().fieldErrors
