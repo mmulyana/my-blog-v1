@@ -20,7 +20,7 @@ export default async function Layout({ children }: React.PropsWithChildren) {
 	const sections = [{ id: 'all', name: 'All' }, ...sectionRes.data]
 
 	return (
-		<div className='pt-10 px-4 md:px-8 grid grid-cols-1 md:grid-cols-[240px_1fr] lg:grid-cols-[1fr_640px_1fr] gap-6 max-w-[1440px] mx-auto'>
+		<div className='py-10 px-4 md:px-8 grid grid-cols-1 md:grid-cols-[240px_1fr] lg:grid-cols-[1fr_640px_1fr] gap-6 max-w-[1440px] mx-auto'>
 			<UserProfile />
 
 			<div>

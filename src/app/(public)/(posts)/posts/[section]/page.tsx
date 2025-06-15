@@ -70,8 +70,8 @@ export default async function Home(props: {
 					</div>
 				))
 			) : (
-				<div className='min-h-40 flex justify-center items-center'>
-					<p className='text-gray-900 max-w-[240px] text-center text-xl'>Looks like the blog is still empty.</p>
+				<div className='min-h-24 pt-6 flex justify-center items-center'>
+					<p className='text-gray-900 max-w-[240px] text-center text-xl'>Stay tuned</p>
 				</div>
 			)}
 			<Pagination totalPages={pagination.totalPages} />

@@ -24,7 +24,7 @@ export default async function Home(props: {
 
 	const { data, pagination } = await readAllPosts({
 		page,
-		limit: 3,
+		limit: 10,
 		status: ['PUBLISHED', 'SOFT_PUBLISHED']
 	})
 
