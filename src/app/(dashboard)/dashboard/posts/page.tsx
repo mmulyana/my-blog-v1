@@ -81,7 +81,9 @@ export default async function ProductsPage({
 								)}
 							</TableCell>
 							<TableCell>
-								<p className='text-foreground text-base'>{item.title}</p>
+								<p className='text-foreground text-base max-w-[280px] text-left'>
+									{item.title}
+								</p>
 							</TableCell>
 							<TableCell>
 								<p className='text-foreground text-base'>

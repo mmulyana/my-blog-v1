@@ -16,7 +16,7 @@ export default async function CategoriesPage({
 	})
 
 	return (
-		<div className='max-w-5xl mx-auto mt-4'>
+		<div className='max-w-5xl mx-auto mt-4 px-4 md:px-0'>
 			<div className='flex justify-between items-center'>
 				<h1 className='text-xl font-medium'>Category</h1>
 				<ModalCategory />

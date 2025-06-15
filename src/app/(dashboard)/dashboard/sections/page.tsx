@@ -5,7 +5,7 @@ import { cn } from '@/shared/utils'
 export default async function Page() {
 	const data = await readAll()
 	return (
-		<div className='max-w-5xl mx-auto mt-4'>
+		<div className='max-w-5xl mx-auto mt-4 px-4 md:px-0'>
 			<div className='flex justify-between items-center'>
 				<h1 className='text-xl font-medium'>Section</h1>
 				<ModalSection />

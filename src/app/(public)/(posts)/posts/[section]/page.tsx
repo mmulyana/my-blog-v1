@@ -22,6 +22,7 @@ export default async function Home(props: {
 		page,
 		limit: 10,
 		sectionId,
+		status: ['PUBLISHED', 'SOFT_PUBLISHED'],
 	})
 
 	return (
@@ -71,7 +72,9 @@ export default async function Home(props: {
 				))
 			) : (
 				<div className='min-h-24 pt-6 flex justify-center items-center'>
-					<p className='text-gray-900 max-w-[240px] text-center text-xl'>Stay tuned</p>
+					<p className='text-gray-900 max-w-[240px] text-center text-xl'>
+						Stay tuned
+					</p>
 				</div>
 			)}
 			<Pagination totalPages={pagination.totalPages} />
