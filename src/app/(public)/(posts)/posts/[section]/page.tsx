@@ -26,45 +26,54 @@ export default async function Home(props: {
 
 	return (
 		<>
-			{data.map((item) => (
-				<div key={item.id} className='flex justify-between items-center p-6'>
-					<div>
-						<p className='text-foreground/50 text-sm'>
-							{diffForHumans(item.createdAt)}
-						</p>
-						<Link
-							href={`/post/${item.id}`}
-							className='text-lg text-gray-900 font-medium'
-						>
-							{item.title}
-						</Link>
-						<div className='flex gap-2 flex-wrap mt-2'>
-							{item.categories.map((i) => (
-								<Badge
-									key={i.id}
-									variant='outline'
-									className='text-sm rounded-full'
-								>
-									<div
-										className='h-1.5 w-1.5 rounded-full'
-										style={{ backgroundColor: i.category.color || '#ccc' }}
-									></div>
-									{i.category.name}
-								</Badge>
-							))}
+			{data.length > 0 ? (
+				data.map((item) => (
+					<div
+						key={item.id}
+						className='flex justify-between items-center p-6 min-h-32'
+					>
+						<div>
+							<p className='text-foreground/50 text-sm'>
+								{diffForHumans(item.createdAt)}
+							</p>
+							<Link
+								href={`/post/${item.id}`}
+								className='text-lg text-gray-900 font-medium'
+							>
+								{item.title}
+							</Link>
+							<div className='flex gap-2 flex-wrap mt-2'>
+								{item.categories.map((i) => (
+									<Badge
+										key={i.id}
+										variant='outline'
+										className='text-sm rounded-full'
+									>
+										<div
+											className='h-1.5 w-1.5 rounded-full'
+											style={{ backgroundColor: i.category.color || '#ccc' }}
+										></div>
+										{i.category.name}
+									</Badge>
+								))}
+							</div>
 						</div>
+						{item.imgUrl && (
+							<Image
+								src={item.imgUrl}
+								width={200}
+								height={140}
+								alt='thumbnail'
+								className='w-[160px] h-[128px] rounded-lg object-cover object-center'
+							/>
+						)}
 					</div>
-					{item.imgUrl && (
-						<Image
-							src={item.imgUrl}
-							width={200}
-							height={140}
-							alt='thumbnail'
-							className='w-[160px] h-[128px] rounded-lg object-cover object-center'
-						/>
-					)}
+				))
+			) : (
+				<div className='min-h-40 flex justify-center items-center'>
+					<p className='text-gray-900 max-w-[240px] text-center text-xl'>Looks like the blog is still empty.</p>
 				</div>
-			))}
+			)}
 			<Pagination totalPages={pagination.totalPages} />
 		</>
 	)

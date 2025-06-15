@@ -67,7 +67,6 @@ export default function FormAuth({ variant }: props) {
 					},
 				}
 			)
-			console.log('register error', error)
 		} else {
 			const { email, password } = values
 			await authClient.signIn.email(
@@ -80,7 +79,7 @@ export default function FormAuth({ variant }: props) {
 					onRequest: () => setIsPending(true),
 					onSuccess: () => {
 						form.reset()
-						router.push('/admin/posts')
+						router.push('/dashboard/posts')
 					},
 					onError: ({ error }) => {
 						toast.error(error.message)
@@ -164,7 +163,7 @@ export default function FormAuth({ variant }: props) {
 					{isRegister ? (
 						<>
 							Already have an account?{' '}
-							<Link href='/sign-in' className='text-primary hover:underline'>
+							<Link href='/login' className='text-primary hover:underline'>
 								Sign in
 							</Link>
 						</>
@@ -172,7 +171,7 @@ export default function FormAuth({ variant }: props) {
 						<>
 							Don&apos;t have an account yet?{' '}
 							<Link
-								href='/admin/register'
+								href='/register'
 								className='text-primary hover:underline'
 							>
 								Sign up

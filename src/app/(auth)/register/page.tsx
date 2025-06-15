@@ -1,3 +1,4 @@
+import { readAuthor } from '@/features/auth/action'
 import FormAuth from '@/features/auth/components/form-auth'
 import { auth } from '@/shared/lib/auth'
 import { headers } from 'next/headers'
@@ -7,6 +8,11 @@ export default async function Page() {
 	const session = await auth.api.getSession({
 		headers: await headers(),
 	})
+
+	const author = await readAuthor()
+	if (author) {
+		return redirect('/')
+	}
 
 	if (session) {
 		return redirect('/')

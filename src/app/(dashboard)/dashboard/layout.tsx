@@ -14,11 +14,20 @@ export default async function Layout({ children }: React.PropsWithChildren) {
 		return redirect('/login')
 	}
 
+	const onLogout = async () => {
+		'use server'
+		await auth.api.signOut({
+			headers: await headers(),
+		})
+
+		return redirect('/login')
+	}
+
 	return (
 		<div className='bg-gray-50 min-h-screen'>
-			<div className='max-w-5xl mx-auto border-b border-gray-200 flex justify-between items-center  py-1.5'>
+			<div className='max-w-5xl mx-auto border-b border-gray-200 flex justify-between items-center px-4 md:px-0 py-1.5'>
 				<Tabs />
-				<UserMenu user={session.user} />
+				<UserMenu user={session.user} onLogout={onLogout} />
 			</div>
 			<div className='max-w-5xl mx-auto'>{children}</div>
 		</div>

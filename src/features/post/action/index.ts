@@ -18,10 +18,14 @@ export async function readAll({
 	createdBy,
 	sectionId,
 	featured,
+	status,
+	categoryIds,
 }: Pagination & {
 	createdBy?: string
 	sectionId?: string
 	featured?: boolean
+	status?: PostStatus | PostStatus[]
+	categoryIds?: string[]
 }) {
 	const skip = (page - 1) * limit
 
@@ -29,10 +33,22 @@ export async function readAll({
 		AND: [
 			createdBy ? { createdBy } : {},
 			sectionId ? { sectionId } : {},
-			featured ? { featured } : {},
-			{
-				deletedAt: null,
-			},
+			featured !== undefined ? { featured } : {},
+			status
+				? Array.isArray(status)
+					? { status: { in: status } }
+					: { status }
+				: {},
+			categoryIds?.length
+				? {
+						categories: {
+							some: {
+								categoryId: { in: categoryIds },
+							},
+						},
+				  }
+				: {},
+			{ deletedAt: null },
 		],
 	}
 
@@ -46,6 +62,9 @@ export async function readAll({
 				id: true,
 				title: true,
 				status: true,
+				featured: true,
+				createdAt: true,
+				imgUrl: true,
 				categories: {
 					select: {
 						id: true,
@@ -58,9 +77,6 @@ export async function readAll({
 						},
 					},
 				},
-				featured: true,
-				createdAt: true,
-				imgUrl: true,
 				section: {
 					select: {
 						id: true,
@@ -94,6 +110,8 @@ export async function read(id: string) {
 			status: true,
 			imgUrl: true,
 			sectionId: true,
+			createdAt: true,
+			updatedAt: true,
 
 			categories: {
 				select: {
@@ -102,6 +120,7 @@ export async function read(id: string) {
 						select: {
 							id: true,
 							name: true,
+							color: true,
 						},
 					},
 				},
@@ -160,7 +179,6 @@ export async function update(formData: unknown) {
 			data: {
 				title: parsed.title,
 				content: parsed.content,
-				status: parsed.status,
 				featured: parsed.featured,
 				imgUrl: parsed.imgUrl,
 				sectionId: parsed.section,

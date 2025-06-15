@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
+import { cn } from '@/shared/utils'
 
 const tabs = [
 	{ name: 'Post', path: '/dashboard/posts' },
@@ -63,12 +64,15 @@ export default function Tabs() {
 					{tabs.map((tab, index) => (
 						<div
 							key={tab.path}
-							ref={(el) => (tabRefs.current[index] = el)}
-							className={`px-3 py-2 cursor-pointer transition-colors duration-300 h-[30px] ${
+							ref={(el) => {
+								tabRefs.current[index] = el
+							}}
+							className={cn(
+								'px-3 py-2 cursor-pointer transition-colors duration-300 h-[30px]',
 								index === activeIndex
 									? 'text-[#0e0e10] dark:text-white'
 									: 'text-[#0e0f1199] dark:text-[#ffffff99]'
-							}`}
+							)}
 							onMouseEnter={() => setHoveredIndex(index)}
 							onMouseLeave={() => setHoveredIndex(null)}
 							onClick={() => router.push(tab.path)}

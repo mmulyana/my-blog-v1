@@ -47,7 +47,7 @@ export default function FormPost({
 	return (
 		<Form {...form}>
 			<form
-				className='max-w-6xl mx-auto mt-4 pb-8'
+				className='max-w-6xl mx-auto mt-4 pb-24 md:pb-8 px-4 md:px-0'
 				onSubmit={form.handleSubmit(onSubmit)}
 			>
 				<div className='grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6'>
@@ -80,7 +80,7 @@ export default function FormPost({
 								</FormItem>
 							)}
 						/>
-						<div className='w-full flex justify-end gap-4'>
+						<div className='w-full justify-end gap-4 hidden md:flex'>
 							{id && <AlertPublishPost status={status} id={id} />}
 							<ButtonSubmit isPending={isPending || false} />
 						</div>
@@ -151,6 +151,10 @@ export default function FormPost({
 							</div>
 						)}
 					</div>
+				</div>
+				<div className='w-full flex justify-end gap-4 fixed bottom-0 left-0 bg-white border-t p-4'>
+					{id && <AlertPublishPost status={status} id={id} />}
+					<ButtonSubmit isPending={isPending || false} />
 				</div>
 			</form>
 		</Form>

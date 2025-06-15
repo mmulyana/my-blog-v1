@@ -39,7 +39,7 @@ export default async function CategoriesPage({
 							<div className='flex gap-2 items-center'>
 								<div
 									className='h-2 w-2 rounded-full'
-									style={{ background: item.color || ''}}
+									style={{ background: item.color || '' }}
 								></div>
 								<p>{item.name}</p>
 							</div>
@@ -48,7 +48,7 @@ export default async function CategoriesPage({
 					)
 				})}
 			</div>
-			<Pagination page={page} totalPages={pagination.totalPages} />
+			<Pagination totalPages={pagination.totalPages} />
 		</div>
 	)
 }

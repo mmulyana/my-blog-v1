@@ -5,6 +5,7 @@ import { linkIcon } from '@/shared/constant/link-icon'
 import { removeHttp } from '@/shared/utils'
 
 import { readAuthor } from '../action'
+import { ExternalLink } from 'lucide-react'
 
 export default async function UserProfile() {
 	const data = await readAuthor()
@@ -21,7 +22,12 @@ export default async function UserProfile() {
 				/>
 			)}
 			<div>
-				<p className='text-gray-900 text-lg font-medium'>{data.name}</p>
+				<div className='flex gap-2 items-center'>
+					<p className='text-gray-900 text-xl font-medium'>{data.name}</p>
+					<Link href={'/profile'}>
+						<ExternalLink size={14} />
+					</Link>
+				</div>
 				<p className='text-gray-500'>{data?.bio}</p>
 			</div>
 			<div>

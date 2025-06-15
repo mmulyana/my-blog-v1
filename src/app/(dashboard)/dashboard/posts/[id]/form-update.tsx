@@ -70,12 +70,11 @@ export default function FormUpdate({
 		if (!res.success) {
 			toast.error(res.message)
 			if (res.errors) {
-				console.log(res.errors)
 				handleFieldErrors(form, res.errors)
 			}
 		} else {
 			toast.success(res.message)
-			router.back()
+			router.replace('/dashboard/posts')
 		}
 	}
 

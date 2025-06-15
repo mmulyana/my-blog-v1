@@ -7,15 +7,15 @@ import LinkDropdown from '@/features/auth/components/link-dropdown'
 import ButtonBack from '@/shared/components/common/button-back'
 import ModalLink from '@/features/auth/components/modal-link'
 
-import { getSessionOrThrow } from '@/shared/lib/session'
 import { linkIcon } from '@/shared/constant/link-icon'
 import { readAuthor } from '@/features/auth/action'
 import { removeHttp } from '@/shared/utils'
+import { auth } from '@/shared/lib/auth'
+import { headers } from 'next/headers'
 
 export default async function Page() {
-	const session = await getSessionOrThrow()
+	const session = await auth.api.getSession({ headers: await headers() })
 	const user = await readAuthor()
-
 	return (
 		<div className='mt-4 w-full max-w-md mx-auto space-y-6'>
 			<ButtonBack path='/' />
@@ -37,7 +37,7 @@ export default async function Page() {
 					{user?.name}
 				</p>
 				<p className='text-center text-gray-500'>{user?.bio}</p>
-				{session.user && (
+				{session?.session && (
 					<ModalProfile
 						user={{
 							id: user.id,
@@ -51,9 +51,9 @@ export default async function Page() {
 			<div className='bg-white p-4 rounded-lg border border-border'>
 				<div className='flex justify-between items-center'>
 					<p className='text-gray-900 font-medium'>Links</p>
-					<ModalLink variant='create' />
+					{session?.session && <ModalLink variant='create' />}
 				</div>
-				<div className='space-y-2 mt-4'>
+				<div className='space-y-4 mt-4'>
 					{user.links.map((i) => (
 						<div key={i.id} className='flex justify-between items-center'>
 							<Link
@@ -64,7 +64,7 @@ export default async function Page() {
 								{linkIcon[i.type]}
 								<p>{removeHttp(i.value)}</p>
 							</Link>
-							<LinkDropdown link={i} />
+							{session?.session && <LinkDropdown link={i} />}
 						</div>
 					))}
 				</div>

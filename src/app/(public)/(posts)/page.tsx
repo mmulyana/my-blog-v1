@@ -25,12 +25,13 @@ export default async function Home(props: {
 	const { data, pagination } = await readAllPosts({
 		page,
 		limit: 3,
+		status: ['PUBLISHED', 'SOFT_PUBLISHED']
 	})
 
 	return (
 		<>
 			{data.map((item) => (
-				<div key={item.id} className='flex justify-between items-center p-6'>
+				<div key={item.id} className='flex justify-between items-center p-6 min-h-32'>
 					<div>
 						<p className='text-foreground/50 text-sm'>
 							{diffForHumans(item.createdAt)}
