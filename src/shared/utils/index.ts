@@ -84,3 +84,7 @@ export async function destroyImage(url: string): Promise<void> {
 export function removeHttp(url: string): string {
 	return url.replace(/^https?:\/\/(www\.)?/, '')
 }
+
+export function delay(ms: number) {
+	return new Promise((res) => setTimeout(res, ms))
+}

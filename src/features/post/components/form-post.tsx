@@ -152,7 +152,7 @@ export default function FormPost({
 						)}
 					</div>
 				</div>
-				<div className='w-full flex justify-end gap-4 fixed bottom-0 left-0 bg-white border-t p-4'>
+				<div className='w-full flex md:hidden justify-end gap-4 fixed bottom-0 left-0 bg-white border-t p-4'>
 					{id && <AlertPublishPost status={status} id={id} />}
 					<ButtonSubmit isPending={isPending || false} />
 				</div>

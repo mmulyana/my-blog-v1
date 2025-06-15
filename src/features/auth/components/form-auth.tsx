@@ -152,7 +152,7 @@ export default function FormAuth({ variant }: props) {
 								</FormItem>
 							)}
 						/>
-						<ButtonSubmit isPending={isPending} />
+						<ButtonSubmit className='w-full' isPending={isPending} />
 					</form>
 				</Form>
 			</CardContent>

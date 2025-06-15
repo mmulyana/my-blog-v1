@@ -1,21 +1,14 @@
-import Link from 'next/link'
+import { Loader } from 'lucide-react'
+import { Suspense } from 'react'
 
 import { readAll as readAllSections } from '@/features/section/action'
-import { readAll as readAllPosts } from '@/features/post/action'
 import UserProfile from '@/features/auth/components/user-profile'
 
 import Tabs2 from '@/shared/components/common/tabs-2'
-import { Badge } from '@/shared/components/ui/badge'
-import { diffForHumans } from '@/shared/utils'
-import { ScrollArea } from '@/shared/components/ui/scroll-area'
-import { Suspense } from 'react'
+import FeaturedPosts from '@/features/post/components/featured-post'
+import { Skeleton } from '@/shared/components/ui/skeleton'
 
 export default async function Layout({ children }: React.PropsWithChildren) {
-	const { data: featureds } = await readAllPosts({
-		page: 1,
-		limit: 5,
-		featured: true,
-	})
 	const sectionRes = await readAllSections()
 	const sections = [{ id: 'all', name: 'All' }, ...sectionRes.data]
 
@@ -34,36 +27,22 @@ export default async function Layout({ children }: React.PropsWithChildren) {
 
 			<div className='mt-8 h-fit bg-white rounded-lg col-end-2 md:col-end-3 lg:col-end-4 p-4'>
 				<p className='text-gray-900 font-medium'>Featured</p>
-				<div className='mt-4 space-y-4'>
-					{featureds.map((item) => (
-						<div key={item.id}>
-							<p className='text-foreground/50 text-sm'>
-								{diffForHumans(item.createdAt)}
-							</p>
-							<Link
-								href={`/post/${item.id}`}
-								className='text-lg text-gray-900 font-medium'
-							>
-								{item.title}
-							</Link>
-							<div className='flex gap-2 flex-wrap mt-2'>
-								{item.categories.map((i) => (
-									<Badge
-										key={i.id}
-										variant='outline'
-										className='text-sm rounded-full'
-									>
-										<div
-											className='h-1.5 w-1.5 rounded-full'
-											style={{ backgroundColor: i.category.color || '#ccc' }}
-										></div>
-										{i.category.name}
-									</Badge>
-								))}
+				<Suspense
+					fallback={
+						<div className='space-y-6 mt-4'>
+							<div className='space-y-2'>
+								<Skeleton className='h-4 w-20 bg-gray-100 rounded' />
+								<Skeleton className='h-6 w-40 bg-gray-200 rounded' />
+							</div>
+							<div className='space-y-2'>
+								<Skeleton className='h-4 w-20 bg-gray-100 rounded' />
+								<Skeleton className='h-6 w-40 bg-gray-200 rounded' />
 							</div>
 						</div>
-					))}
-				</div>
+					}
+				>
+					<FeaturedPosts />
+				</Suspense>
 			</div>
 		</div>
 	)
