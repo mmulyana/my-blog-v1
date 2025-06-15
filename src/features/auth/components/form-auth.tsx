@@ -54,7 +54,7 @@ export default function FormAuth({ variant }: props) {
 					email,
 					name,
 					password,
-					callbackURL: '/register',
+					callbackURL: '/onboarding',
 				},
 				{
 					onRequest: () => setIsPending(true),
@@ -73,13 +73,12 @@ export default function FormAuth({ variant }: props) {
 				{
 					email,
 					password,
-					callbackURL: '/admin/posts',
+					callbackURL: '/dashboard/posts',
 				},
 				{
 					onRequest: () => setIsPending(true),
 					onSuccess: () => {
 						form.reset()
-						router.push('/dashboard/posts')
 					},
 					onError: ({ error }) => {
 						toast.error(error.message)
@@ -170,10 +169,7 @@ export default function FormAuth({ variant }: props) {
 					) : (
 						<>
 							Don&apos;t have an account yet?{' '}
-							<Link
-								href='/register'
-								className='text-primary hover:underline'
-							>
+							<Link href='/register' className='text-primary hover:underline'>
 								Sign up
 							</Link>
 						</>

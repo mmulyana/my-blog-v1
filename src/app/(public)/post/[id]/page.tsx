@@ -59,7 +59,7 @@ export default async function DetailPost({
 			</div>
 			<div className='mt-10 grid grid-cols-2 lg:grid-cols-3 gap-6'>
 				{relatedPost.data.map((i) => (
-					<div key={i.id}>
+					<Link key={i.id} href={`/post/${i.id}`}>
 						{i.imgUrl ? (
 							<Image
 								width={320}
@@ -76,13 +76,8 @@ export default async function DetailPost({
 						<p className='text-gray-500 mt-2 text-sm mb-1'>
 							{diffForHumans(data.createdAt)}
 						</p>
-						<Link
-							href={`post/${i.id}`}
-							className='text-lg text-gray-900 font-medium'
-						>
-							{i.title}
-						</Link>
-					</div>
+						<p className='text-lg text-gray-900 font-medium'>{i.title}</p>
+					</Link>
 				))}
 			</div>
 		</main>
