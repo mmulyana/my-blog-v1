@@ -24,7 +24,7 @@ export default async function Layout({ children }: React.PropsWithChildren) {
 	}
 
 	return (
-		<div className='bg-gray-50 min-h-screen'>
+		<div className='bg-gray-50 min-h-screen pb-10'>
 			<div className='max-w-5xl mx-auto border-b border-gray-200 flex justify-between items-center px-4 md:px-0 py-1.5'>
 				<Tabs />
 				<UserMenu user={session.user} onLogout={onLogout} />

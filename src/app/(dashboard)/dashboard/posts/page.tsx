@@ -34,7 +34,7 @@ export default async function ProductsPage({
 	})
 
 	return (
-		<div className='max-w-5xl mx-auto space-y-4 mt-4'>
+		<div className='max-w-5xl mx-auto space-y-4 mt-4 px-4 md:px-0'>
 			<div className='flex justify-between items-center'>
 				<h1 className='text-xl font-medium'>My posts</h1>
 				<Link
@@ -81,7 +81,7 @@ export default async function ProductsPage({
 								)}
 							</TableCell>
 							<TableCell>
-								<p className='text-foreground text-base max-w-[280px] text-left'>
+								<p className='text-foreground text-base text-wrap w-[200px] text-left'>
 									{item.title}
 								</p>
 							</TableCell>

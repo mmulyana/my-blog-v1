@@ -1,5 +1,5 @@
 import ModalCategory from '@/features/category/components/modal-category'
-import { readByPagination } from '@/features/category/action'
+import { readAll, readByPagination } from '@/features/category/action'
 import Pagination from '@/shared/components/common/pagination'
 import { cn } from '@/shared/utils'
 
@@ -10,10 +10,7 @@ export default async function CategoriesPage({
 }) {
 	const page = Number((await searchParams).page ?? '1')
 
-	const { data, pagination } = await readByPagination({
-		page,
-		limit: 5,
-	})
+	const { data } = await readAll()
 
 	return (
 		<div className='max-w-5xl mx-auto mt-4 px-4 md:px-0'>
@@ -48,7 +45,6 @@ export default async function CategoriesPage({
 					)
 				})}
 			</div>
-			<Pagination totalPages={pagination.totalPages} />
 		</div>
 	)
 }
