@@ -18,7 +18,7 @@ export const PostSchema = z.object({
 		.array(z.string().min(1, 'Category tidak boleh kosong'))
 		.default([]),
 	imgUrl: z.string().nullable().optional(),
-	section: z.string().optional(),
+	collectionId: z.string(),
 	file: z.union([FileSchema, z.string(), z.null()]).optional(),
 })
 

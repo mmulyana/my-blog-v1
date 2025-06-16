@@ -8,10 +8,10 @@ import { messages } from '@/shared/constant/messages'
 import { formatError } from '@/shared/utils'
 import prisma from '@/shared/lib/prisma'
 
-import { SectionSchema } from '../schema'
+import { CollectionSchema } from '../schema'
 
 export const readAll = async () => {
-	const data = await prisma.section.findMany({
+	const data = await prisma.collection.findMany({
 		orderBy: { name: 'asc' },
 	})
 
@@ -22,13 +22,14 @@ export const readAll = async () => {
 
 export async function create(formData: unknown) {
 	try {
-		const data = SectionSchema.parse(formData)
+		const data = CollectionSchema.parse(formData)
 
-		await prisma.section.create({
+		await prisma.collection.create({
 			data,
 		})
 
-		revalidatePath('/admin/sections')
+		revalidatePath('/dashboard/collections')
+		revalidatePath('/')
 		return { success: true, message: messages.success.saved }
 	} catch (error) {
 		if (error instanceof ZodError) {
@@ -46,9 +47,9 @@ export async function create(formData: unknown) {
 export async function update(formData: unknown) {
 	try {
 		await getSessionOrThrow()
-		const parsed = SectionSchema.extend({ id: z.string() }).parse(formData)
+		const parsed = CollectionSchema.extend({ id: z.string() }).parse(formData)
 
-		await prisma.section.update({
+		await prisma.collection.update({
 			data: {
 				...parsed,
 			},
@@ -57,7 +58,8 @@ export async function update(formData: unknown) {
 			},
 		})
 
-		revalidatePath('/admin/sections')
+		revalidatePath('/dashboard/collections')
+		revalidatePath('/')
 		return { success: true, message: messages.success.updated }
 	} catch (error) {
 		if (error instanceof ZodError) {

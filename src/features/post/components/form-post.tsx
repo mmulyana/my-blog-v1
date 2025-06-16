@@ -101,7 +101,7 @@ export default function FormPost({
 						/>
 						<FormField
 							control={form.control}
-							name='section'
+							name='collectionId'
 							render={({ field }) => (
 								<FormItem className='w-full'>
 									<FormLabel>Section</FormLabel>

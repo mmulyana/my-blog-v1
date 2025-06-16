@@ -10,18 +10,18 @@ export default async function Home(props: {
 		page?: string
 	}>
 	params?: Promise<{
-		section?: string
+		collection?: string
 	}>
 }) {
 	const searchParams = await props.searchParams
 	const page = Number(searchParams?.page) || 1
 
-	const sectionId = (await props.params)?.section
+	const collectionId = (await props.params)?.collection
 
 	const { data, pagination } = await readAll({
 		page,
 		limit: 10,
-		sectionId,
+		collectionId,
 		status: ['PUBLISHED', 'SOFT_PUBLISHED'],
 	})
 

@@ -1,5 +1,5 @@
-import { readAll } from '@/features/section/action'
-import ModalSection from '@/features/section/components/modal-section'
+import ModalSection from '@/features/collection/components/modal-collection'
+import { readAll } from '@/features/collection/action'
 import { cn } from '@/shared/utils'
 
 export default async function Page() {

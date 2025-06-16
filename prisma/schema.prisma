@@ -77,14 +77,14 @@ model Post {
   featured Boolean    @default(false)
   imgUrl   String?
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  createdBy String
-  sectionId String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+  createdBy    String
+  collectionId String?
 
-  user    User     @relation(fields: [createdBy], references: [id])
-  section Section? @relation(fields: [sectionId], references: [id])
+  user       User        @relation(fields: [createdBy], references: [id])
+  collection Collection? @relation(fields: [collectionId], references: [id])
 
   categories PostCategory[]
 }
@@ -109,7 +109,7 @@ model PostCategory {
   @@unique([postId, categoryId])
 }
 
-model Section {
+model Collection {
   id    String @id @default(ulid())
   name  String @db.VarChar(100)
   posts Post[]

@@ -1,19 +1,18 @@
-import { toast } from 'sonner'
-import { destroy, publish } from '../action'
-import { AlertV1 } from '@/shared/components/common/alert-v1'
+import { Check, ChevronDown } from 'lucide-react'
+import { PostStatus } from '@prisma/client'
 import { useRouter } from 'next/navigation'
-import { buttonVariants } from '@/shared/components/ui/button'
+import { toast } from 'sonner'
+
+import { Separator } from '@/shared/components/ui/separator'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
-	DropdownMenuLabel,
 	DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu'
-import { Separator } from '@/shared/components/ui/separator'
-import { Check, ChevronDown } from 'lucide-react'
-import { PostStatus } from '@prisma/client'
+
+import { publish } from '../action'
 
 export default function AlertPublishPost({
 	id,

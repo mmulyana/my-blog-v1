@@ -1,7 +1,8 @@
 import Link from 'next/link'
+
+import { readAll as readAllPosts } from '@/features/post/action'
 import { Badge } from '@/shared/components/ui/badge'
 import { diffForHumans } from '@/shared/utils'
-import { readAll as readAllPosts } from '@/features/post/action'
 
 function delay(ms: number) {
 	return new Promise((res) => setTimeout(res, ms))

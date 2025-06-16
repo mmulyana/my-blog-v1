@@ -61,7 +61,7 @@ export default async function Home(props: {
 							))}
 						</div>
 					</div>
-					{item.imgUrl && (
+					{item?.imgUrl && (
 						<Image
 							src={item.imgUrl}
 							width={200}

@@ -30,9 +30,17 @@ export default async function DetailPost({
 	return (
 		<main className='container mx-auto max-w-3xl px-4 pt-10 pb-10'>
 			<ButtonBack path='/' />
-			<p className='text-gray-500 text-center text-sm mb-2'>
-				{diffForHumans(data.createdAt)}
-			</p>
+			<div className='flex gap-2 items-center justify-center mb-2'>
+				<p className='text-gray-500 text-center text-sm'>
+					{diffForHumans(data.createdAt)}
+				</p>
+				{data.status && 'SOFT_PUBLISHED' && (
+					<>
+						<div className='h-2 w-2 rounded-full bg-gray-900'></div>
+						<Badge variant='outline'>Content in Development</Badge>
+					</>
+				)}
+			</div>
 			<p className='text-3xl font-medium text-center mb-2'>{data.title}</p>
 			<div className='flex justify-center gap-2 max-w-md mx-auto mb-4'>
 				{data.categories.map((i) => (

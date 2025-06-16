@@ -1,19 +1,14 @@
 'use client'
 
-import { Button } from '@/shared/components/ui/button'
 import { Pencil, Plus } from 'lucide-react'
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from '@/shared/components/ui/dialog'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+
+import ButtonSubmit from '@/shared/components/common/button-submit'
+import { Button } from '@/shared/components/ui/button'
 import { handleFieldErrors } from '@/shared/lib/form'
+import { Input } from '@/shared/components/ui/input'
 import {
 	Form,
 	FormControl,
@@ -22,12 +17,19 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/shared/components/ui/form'
-import { Input } from '@/shared/components/ui/input'
-import ButtonSubmit from '@/shared/components/common/button-submit'
-import { Section } from '../schema'
-import { create, update } from '../action'
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/shared/components/ui/dialog'
 
-export default function ModalSection({
+import { create, update } from '../action'
+import { Section } from '../schema'
+
+export default function ModalCollection({
 	data,
 	variant = 'default',
 }: {

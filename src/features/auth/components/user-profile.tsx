@@ -12,7 +12,7 @@ export default async function UserProfile() {
 
 	return (
 		<div className='flex flex-col gap-6'>
-			{data.image && (
+			{data?.image && (
 				<Image
 					src={data.image}
 					width={104}
@@ -23,7 +23,7 @@ export default async function UserProfile() {
 			)}
 			<div>
 				<div className='flex gap-2 items-center'>
-					<p className='text-gray-900 text-xl font-medium'>{data.name}</p>
+					<p className='text-gray-900 text-xl font-medium'>{data?.name}</p>
 					<Link href={'/profile'}>
 						<ExternalLink size={14} />
 					</Link>
@@ -33,7 +33,7 @@ export default async function UserProfile() {
 			<div>
 				<p className='text-gray-900 font-medium'>Links</p>
 				<div className='space-y-2.5 mt-4'>
-					{data.links.map((i) => (
+					{data?.links.map((i) => (
 						<div key={i.id} className='flex justify-between items-center'>
 							<Link
 								href={i.value}

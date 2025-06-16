@@ -6,7 +6,7 @@ import { cn } from '@/shared/utils'
 
 const tabs = [
 	{ name: 'Post', path: '/dashboard/posts' },
-	{ name: 'Section', path: '/dashboard/sections' },
+	{ name: 'Collection', path: '/dashboard/collections' },
 	{ name: 'Category', path: '/dashboard/categories' },
 ]
 

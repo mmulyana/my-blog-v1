@@ -42,7 +42,7 @@ export default function FormUpdate({
 			file: data?.imgUrl as any,
 			imgUrl: data?.imgUrl,
 			categories: data?.categories?.map((i) => i.category.id),
-			section: data?.section,
+			collectionId: data?.collectionId,
 		},
 	})
 

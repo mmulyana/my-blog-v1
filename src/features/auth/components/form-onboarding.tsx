@@ -44,8 +44,6 @@ export default function FormOnboarding({
 			const uploadedUrl = await uploadImage(data.file)
 			data.image = uploadedUrl
 		}
-		console.log('data', data)
-
 		const res = await updateProfile(data)
 		setIsPending(false)
 

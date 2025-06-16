@@ -31,6 +31,7 @@ export default function FormNewPost({
 			categories: [],
 			imgUrl: '',
 			file: undefined,
+			collectionId: '',
 		},
 	})
 

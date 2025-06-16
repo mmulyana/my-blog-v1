@@ -72,7 +72,7 @@ CREATE TABLE "Post" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "deletedAt" TIMESTAMP(3),
     "createdBy" TEXT NOT NULL,
-    "sectionId" TEXT,
+    "collectionId" TEXT,
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
 );
@@ -99,11 +99,11 @@ CREATE TABLE "PostCategory" (
 );
 
 -- CreateTable
-CREATE TABLE "Section" (
+CREATE TABLE "Collection" (
     "id" TEXT NOT NULL,
     "name" VARCHAR(100) NOT NULL,
 
-    CONSTRAINT "Section_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Collection_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -138,7 +138,7 @@ ALTER TABLE "account" ADD CONSTRAINT "account_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Post" ADD CONSTRAINT "Post_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Post" ADD CONSTRAINT "Post_sectionId_fkey" FOREIGN KEY ("sectionId") REFERENCES "Section"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Post" ADD CONSTRAINT "Post_collectionId_fkey" FOREIGN KEY ("collectionId") REFERENCES "Collection"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PostCategory" ADD CONSTRAINT "PostCategory_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,66 +1,60 @@
 import { read } from '@/features/post/action'
 import FormUpdate from './form-update'
 import { readAll as readAllCategories } from '@/features/category/action'
-import { readAll as readAllSections } from '@/features/section/action'
+import { readAll as readAllSections } from '@/features/collection/action'
 
-export default async function DetailPost({
-	params,
-}: {
+interface DetailPostProps {
 	params: Promise<{ id: string }>
-}) {
-	const postId = (await params).id
-	const res = await read(postId)
-	const categoryRes = await readAllCategories()
-	const sectionRes = await readAllSections()
+}
 
-	if (!res) {
-		return <div>Produk tidak ditemukan.</div>
+export default async function DetailPost({ params }: DetailPostProps) {
+	const { id: postId } = await params
+
+	const [post, categoryRes, sectionRes] = await Promise.all([
+		read(postId),
+		readAllCategories(),
+		readAllSections(),
+	])
+
+	if (!post) {
+		return <div>Post not found</div>
 	}
 
-	const data = {
-		categories: res.categories.map((i) => ({
-			id: i.id,
+	const formattedPost = {
+		id: post.id,
+		title: post.title,
+		content: post.content,
+		featured: post.featured,
+		status: post.status,
+		imgUrl: post.imgUrl,
+		collectionId: post.collectionId || '',
+		categories: post.categories.map((item) => ({
+			id: item.id,
 			category: {
-				name: i.category.name,
-				id: i.category.id,
+				id: item.category.id,
+				name: item.category.name,
 			},
 		})),
-		content: res.content,
-		featured: res.featured,
-		id: res.id,
-		status: res.status,
-		title: res.title,
-		imageUrl: res.imgUrl,
-		sectionId: res.sectionId,
 	}
 
 	const categories =
-		categoryRes?.data?.map((i) => ({
-			id: i.id,
-			name: i.name,
+		categoryRes?.data?.map((item) => ({
+			id: item.id,
+			name: item.name,
 		})) || []
 
 	const sections =
-		sectionRes.data.map((i) => ({
-			id: i.id,
-			name: i.name,
+		sectionRes?.data?.map((item) => ({
+			id: item.id,
+			name: item.name,
 		})) || []
 
 	return (
 		<FormUpdate
-			data={{
-				categories: data.categories,
-				content: data.content,
-				featured: data.featured,
-				id: data.id,
-				status: data.status,
-				title: data.title,
-				imgUrl: data.imageUrl,
-				section: data.sectionId || '',
-			}}
-			categories={categories}
 			id={postId}
+			categories={categories}
 			sections={sections}
+			data={formattedPost}
 		/>
 	)
 }

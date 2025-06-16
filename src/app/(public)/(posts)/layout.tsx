@@ -1,7 +1,7 @@
 import { Loader } from 'lucide-react'
 import { Suspense } from 'react'
 
-import { readAll as readAllSections } from '@/features/section/action'
+import { readAll as readAllSections } from '@/features/collection/action'
 import UserProfile from '@/features/auth/components/user-profile'
 
 import Tabs2 from '@/shared/components/common/tabs-2'

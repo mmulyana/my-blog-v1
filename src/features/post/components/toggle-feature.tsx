@@ -1,7 +1,8 @@
 'use client'
 
-import ToggleSwitch from '@/shared/components/common/toggle-switch'
 import { toast } from 'sonner'
+
+import ToggleSwitch from '@/shared/components/common/toggle-switch'
 import { toggle } from '../action'
 
 export default function ToggleFeatured({

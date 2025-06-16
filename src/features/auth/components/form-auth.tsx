@@ -49,7 +49,7 @@ export default function FormAuth({ variant }: props) {
 
 		if (variant === 'register') {
 			const { name, email, password } = values
-			const { error } = await authClient.signUp.email(
+			await authClient.signUp.email(
 				{
 					email,
 					name,

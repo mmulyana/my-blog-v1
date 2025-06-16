@@ -87,7 +87,7 @@ export default async function ProductsPage({
 							</TableCell>
 							<TableCell>
 								<p className='text-foreground text-base'>
-									{item?.section?.name}
+									{item?.collection?.name}
 								</p>
 							</TableCell>
 							<TableCell>

@@ -1,8 +1,10 @@
-import { toast } from 'sonner'
-import { destroy } from '../action'
-import { AlertV1 } from '@/shared/components/common/alert-v1'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+
 import { buttonVariants } from '@/shared/components/ui/button'
+import { AlertV1 } from '@/shared/components/common/alert-v1'
+
+import { destroy } from '../action'
 
 export default function AlertDestroyPost({ id }: { id?: string }) {
 	const router = useRouter()

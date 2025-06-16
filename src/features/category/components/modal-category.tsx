@@ -32,7 +32,7 @@ export default function ModalCategory({
 		default: (
 			<Button>
 				<Plus size={18} />
-				<span>Tambah</span>
+				<span>New</span>
 			</Button>
 		),
 		edit: (

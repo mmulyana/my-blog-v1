@@ -16,13 +16,13 @@ export async function readAll({
 	page,
 	limit,
 	createdBy,
-	sectionId,
+	collectionId,
 	featured,
 	status,
 	categoryIds,
 }: Pagination & {
 	createdBy?: string
-	sectionId?: string
+	collectionId?: string
 	featured?: boolean
 	status?: PostStatus | PostStatus[]
 	categoryIds?: string[]
@@ -32,7 +32,7 @@ export async function readAll({
 	const where: Prisma.PostWhereInput = {
 		AND: [
 			createdBy ? { createdBy } : {},
-			sectionId ? { sectionId } : {},
+			collectionId ? { collectionId } : {},
 			featured !== undefined ? { featured } : {},
 			status
 				? Array.isArray(status)
@@ -77,7 +77,7 @@ export async function readAll({
 						},
 					},
 				},
-				section: {
+				collection: {
 					select: {
 						id: true,
 						name: true,
@@ -109,7 +109,7 @@ export async function read(id: string) {
 			featured: true,
 			status: true,
 			imgUrl: true,
-			sectionId: true,
+			collectionId: true,
 			createdAt: true,
 			updatedAt: true,
 
@@ -141,7 +141,7 @@ export async function create(formData: unknown) {
 				status: parsed.status,
 				featured: parsed.featured,
 				createdBy: session.user.id,
-				sectionId: parsed.section,
+				collectionId: parsed.collectionId,
 				imgUrl: parsed.imgUrl,
 				categories: {
 					create: parsed.categories.map((categoryId) => ({
@@ -181,7 +181,7 @@ export async function update(formData: unknown) {
 				content: parsed.content,
 				featured: parsed.featured,
 				imgUrl: parsed.imgUrl,
-				sectionId: parsed.section,
+				collectionId: parsed.collectionId,
 				categories: {
 					deleteMany: {},
 					create: parsed.categories.map((categoryId) => ({

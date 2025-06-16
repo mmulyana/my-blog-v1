@@ -1,5 +1,5 @@
 import { readAll as ReadAllCategories } from '@/features/category/action'
-import { readAll as ReadAllSections } from '@/features/section/action'
+import { readAll as ReadAllSections } from '@/features/collection/action'
 import FormNewPost from './form-new-post'
 
 export default async function Page() {
