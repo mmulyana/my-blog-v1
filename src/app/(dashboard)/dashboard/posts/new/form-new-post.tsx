@@ -41,6 +41,7 @@ export default function FormNewPost({
 		if (data.file instanceof File) {
 			const uploadedUrl = await uploadImage(data.file)
 			data.imgUrl = uploadedUrl
+			delete data.file
 		}
 
 		const res = await create(data)

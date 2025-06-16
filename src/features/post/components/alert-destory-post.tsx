@@ -18,7 +18,7 @@ export default function AlertDestroyPost({ id }: { id?: string }) {
 			toast.error(res.message)
 		} else {
 			toast.success(res.message)
-			router.replace('/admin/posts')
+			router.replace('/dashboard/posts')
 		}
 	}
 

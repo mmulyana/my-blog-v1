@@ -144,7 +144,7 @@ export async function create(formData: unknown) {
 				collectionId: parsed.collectionId,
 				imgUrl: parsed.imgUrl,
 				categories: {
-					create: parsed.categories.map((categoryId) => ({
+					create: parsed?.categories.map((categoryId) => ({
 						category: {
 							connect: { id: categoryId },
 						},
