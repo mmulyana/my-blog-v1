@@ -36,9 +36,17 @@ export default async function Home(props: {
 					className='flex justify-between items-center p-6 min-h-32'
 				>
 					<div>
-						<p className='text-foreground/50 text-sm'>
-							{diffForHumans(item.createdAt)}
-						</p>
+						<div className='flex gap-2 items-center'>
+							<p className='text-foreground/50 text-sm'>
+								{diffForHumans(item.createdAt)}
+							</p>
+							{item.status && 'SOFT_PUBLISHED' && (
+								<>
+									<div className='h-1.5 w-1.5 rounded-full bg-gray-900'></div>
+									<Badge variant='outline'>Content in Development</Badge>
+								</>
+							)}
+						</div>
 						<Link
 							href={`post/${item.id}`}
 							className='text-lg text-gray-900 font-medium'

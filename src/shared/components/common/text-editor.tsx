@@ -126,9 +126,9 @@ export default function TextEditor({
 
 	return (
 		<div className='w-full'>
-			<div className='border border-border rounded-lg overflow-hidden bg-white'>
+			<div className='border border-border rounded-lg relative'>
 				{/* Toolbar */}
-				<div className='p-2 flex flex-wrap gap-1 border-b border-border'>
+				<div className='p-2 flex flex-wrap gap-1 border-b border-border sticky top-0 z-10 bg-white rounded-t-lg'>
 					{/* Text Formatting */}
 					<Button
 						type='button'

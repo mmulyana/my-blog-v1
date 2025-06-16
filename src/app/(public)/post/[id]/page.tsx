@@ -36,7 +36,7 @@ export default async function DetailPost({
 				</p>
 				{data.status && 'SOFT_PUBLISHED' && (
 					<>
-						<div className='h-2 w-2 rounded-full bg-gray-900'></div>
+						<div className='h-1.5 w-1.5 rounded-full bg-gray-900'></div>
 						<Badge variant='outline'>Content in Development</Badge>
 					</>
 				)}
