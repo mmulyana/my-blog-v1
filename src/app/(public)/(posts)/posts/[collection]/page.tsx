@@ -41,7 +41,7 @@ export default async function Home(props: {
 								{item.status && 'SOFT_PUBLISHED' && (
 									<>
 										<div className='h-1.5 w-1.5 rounded-full bg-gray-900'></div>
-										<Badge variant='outline'>Content in Development</Badge>
+										<Badge variant='outline'>Work in Progress</Badge>
 									</>
 								)}
 							</div>
