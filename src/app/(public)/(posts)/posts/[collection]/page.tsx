@@ -38,7 +38,7 @@ export default async function Home(props: {
 								<p className='text-foreground/50 text-sm'>
 									{diffForHumans(item.createdAt)}
 								</p>
-								{item.status && 'SOFT_PUBLISHED' && (
+								{item.status === 'SOFT_PUBLISHED' && (
 									<>
 										<div className='h-1.5 w-1.5 rounded-full bg-gray-900'></div>
 										<Badge variant='outline'>Work in Progress</Badge>

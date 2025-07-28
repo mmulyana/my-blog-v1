@@ -34,7 +34,7 @@ export default async function DetailPost({
 				<p className='text-gray-500 text-center text-sm'>
 					{diffForHumans(data.createdAt)}
 				</p>
-				{data.status && 'SOFT_PUBLISHED' && (
+				{data.status === 'SOFT_PUBLISHED' && (
 					<>
 						<div className='h-1.5 w-1.5 rounded-full bg-gray-900'></div>
 						<Badge variant='outline'>Work in Progress</Badge>
